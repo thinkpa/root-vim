@@ -1,0 +1,20 @@
+更炫的语法高亮:
+ 你可能会发现很多东西没有高亮起来, 比如运算符号, 各种括号, 函数名, 自定义类型等, 但是看上面的图片, 我的运算符号和函数名都加亮了^_^, 想知道为什么吗? 哇哈哈哈哈.... 让我来教你吧 ...
+
+ 主要的思路是新建一个语法文件, 在文件中定义你要高亮的东东, 想高亮什么就高亮什么, 用vim就是这么自信. 所谓的语法文件就是vim用来高亮各种源文件的一个脚本, vim靠这个脚本的描述来使文件中的不同文本显示不同的颜色, 比如C语言的语法文件放在类似于这样的一个路径中:
+ /usr/share/vim/vim64/syntax/c.vim
+ 其 他语言的语法文件也可以在这个路径中找到, 你的也许不在这个路径中, 不管它, 在你自己的HOME下新建一个语法文件, 新建一个空文件:
+ ~/.vim/syntax/c.vim
+ 在 其中加入
+
+"======================================================== " Highlight All Function "======================================================== syn match cFunction "/<[a-zA-Z_][a-zA-Z_0-9]*/>[^()]*)("me=e-2 syn match cFunction "/<[a-zA-Z_][a-zA-Z_0-9]*/>/s*("me=e-1 hi cFunction gui=NONE guifg=#B5A1FF "======================================================== " Highlight All Math Operator "======================================================== " C math operators syn match cMathOperator display "[-+/*/%=]" " C pointer operators syn match cPointerOperator display "->/|/." " C logical operators - boolean results syn match cLogicalOperator display "[!<>]=/=" syn match cLogicalOperator display "==" " C bit operators syn match cBinaryOperator display"/(&/||/|/^/|<</|>>/)=/=" syn match cBinaryOperator display "/~" syn match cBinaryOperatorError display "/~=" " More C logical operators - highlight in preference to binary syn match cLogicalOperator display "&&/|||" syn match cLogicalOperatorError display "/(&&/|||/)="  " Math Operator hi cMathOperator guifg=#3EFFE2 hi cPointerOperator guifg=#3EFFE2 hi cLogicalOperator guifg=#3EFFE2 hi cBinaryOperator guifg=#3EFFE2 hi cBinaryOperatorError guifg=#3EFFE2 hi cLogicalOperator guifg=#3EFFE2 hi cLogicalOperatorError guifg=#3EFFE2
+ 
+
+ 再打开你的C文件看看, 是不是又明亮了许多. 还有一个压箱底的要告诉你, 如果你自己增加了一个类型或者结构之类的, 怎么让它也象"int", "void"这样高亮起来呢? 再在上面的文件~/.vim/syntax/c.vim中添加下面的东东: 
+"======================================================== " My Own DataType "======================================================== syn keyword cType My_Type_1 My_Type_2 My_Type_3
+ 
+这样你自己的类型My_Type_1, My_Type_2, My_Type_3就也可以向"int"一样高亮起来了, 这样的缺点是每增加一个类型, 就要手动在这里添加一下, 如果有人知道更简单的方法请一定一定要告诉我, 用下面的地址:
+
+Email : lazy.fox.wu#gmail.com 
+Homepage : http://blog.csdn.net/wooin 
+
