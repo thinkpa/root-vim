@@ -12,8 +12,8 @@ cat << EOF
 #********************************
 # Copyright (C) $year All rights reserved.
 #  文件名称：$filename
-*  创 建 者：kevin
-*  邮    箱：zxw110@163.com
+#  创 建 者：kevin
+#  邮    箱：zxw110@163.com
 #  创建日期：$datetime
 #  描    述：
 #   

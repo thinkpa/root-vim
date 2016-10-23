@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/root'
+let g:netrw_dirhist_2='/root/.vim/bundle'
+let g:netrw_dirhist_3='/root/.vim/bundle/FencView.vim'
+let g:netrw_dirhist_4='/root/.vim/bundle'
+let g:netrw_dirhist_5='/root/.vim/bundle/ShowPairs'
+let g:netrw_dirhist_6='/root/.vim/bundle/ShowPairs/.git'
+let g:netrw_dirhist_7='/root/.vim/bundle'
+let g:netrw_dirhist_8='/root/.vim/bundle/SudoEdit.vim'
