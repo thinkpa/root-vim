@@ -1,7 +1,7 @@
  execute pathogen#infect() 
 " -------------------------------------------------------------------------
 " Description: 适合自己使用的vimrc文件，for Linux/Windows, GUI/Console
-" LastModified: 2016-Oct-23 02:28:42  CST
+" LastModified: 2016-Oct-24 11:21:32  CST
 " Version:     1.80
 " -------------------------------------------------------------------------
 "
@@ -288,10 +288,10 @@ let mapleader=','
 " 杂项设置
 " -------------------------------------------------------------------------------------------------
 
- if version >= 700
-   au InsertEnter * hi StatusLine term=reverse ctermbg=5 gui=undercurl guisp=Magenta
-   au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
- endif
+	 if version >= 700
+	   au InsertEnter * hi StatusLine term=reverse ctermbg=5 gui=undercurl guisp=Magenta
+	   au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
+	 endif
 " -------------------------------------------------------------------------------------------------
 """启用自定义模板插件
 " -------------------------------------------------------------------------------------------------
@@ -401,7 +401,6 @@ let mapleader=','
 		"	" m：在多字节字符处可以折行，对中文特别有效（否则只在空白字符处折行）；
 		"	" M：在拼接两行时（重新格式化，或者是手工使用“J”命令），如果前一行的结尾或后一行的开头是多字节字符，则不插入空格，非常适合中文
 "--------------------------------------------------------------------------------------
-"---
 " -------------------------------------------------------------------------------------------------
 " 折叠功能
 " -------------------------------------------------------------------------------------------------
@@ -462,9 +461,6 @@ let mapleader=','
 		"手动折叠:
 		"	:mkview		"保存手动创建的折叠视图"
 		"	:loadview	"加载保存的视图"
-"
-"
-"
 "---------------------------------------------------------------------------------
 
 "设置命令行和状态栏
@@ -641,38 +637,55 @@ nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
 "--------------------------------------------------------------------------
 "''"快捷键"配色方案
+"color
+" Aliceblue        " Antiquewhite  " Aqua           " Aquamarine     " Azure          " Beige                " Bisque            " Black           " Blanchedalmond  " Blue
+" Blueviolet       " Brown         " Burlywood      " Cadetblue      " Chartruse      " Chocolate            " Coral             " Cornflowerblue  " Cornsilk        " Crimson
+" Cyan             " Darkblue      " Darkcyan       " Darkgoldenrod  " Darkgray       " Darkgreen            " Darkkhaki         " Darkmagenta     " Darkolivegreen  " Darkorange
+" Darkorchid       " Darksalmon    " Darkseagreen   " Darkslateblue  " Darkslategray  " Darkturquoise        " Darkviolet        " Deeppink        " Deepskyblue     " Dimgray
+" Dodgerblue       " Firebrick     " Floralwhite    " Forestgreen    " Fuchsia        " Gainsboro            " Ghostwhite        " Gold            " Goldenrod       " Gray
+" Green            " Greenyellow   " Honeydew       " Hotpink        " Indianred      " Indigo               " Ivory             " Khaki           " Lavender        " Lavenderblush
+" lawngreen        " Lemonchiffon  " Lightblue      " Lightcoral     " Lightcyan      " Lightgoldenrodyellow " Lightgreen        " Lightgrey       " Lightpink       " Lightsalmon
+" Lightseagreen    " Lightskyblue  " Lightslategray " Lightsteelblue " Lightyellow    " Lime                 " Limegreen         " Linen           " Magenta         " Maroon
+" Mediumaquamarine " Mediumblue    " Mediumorchid   " Mediumpurple   " Mediumseagreen " Mediumslateblue      " Mediumspringgreen " Mediumturquoise " Mediumvioletred " Midnightblue
+" Mintcream        " Mistyrose     " Moccasin       " Navajowhite    " Navy           " Oldlace              " Olive             " Olivedrab       " Orange          " Orangered
+" Orchid           " Palegoldenrod " Palegreen      " Paleturquoise  " Palevioletred  " Papayawhip           " Peachpuff         " Peru            " Pink            " Plum
+" Powderblue       " Purple        " Red            " Rosybrown      " Royalblue      " Saddlebrown          " Salmon            " Sandybrown      " Seagreen        " Seashell
+" Sienna           " Silver        " Skyblue        " Slateblue      " Slategray      " Snow                 " Springgreen       " Steelblue       " Tan             " Teal
+" Thistle          " Tomato        " Turquoise      " Violet         " Wheat          " White                " Whitesmoke        " Yellow          " Yellowgreen
 "--------------------------------------------------------------------------
 " -------------------------------------------------------------------------------------------------
 " for winManager
 " -------------------------------------------------------------------------------------------------
-	let g:AutoOpenWinManager   = 1
+	let g:AutoOpenWinManager   = 0
 	let g:NERDTree_title       = "[NERDTree]"
 	let g:bufExplorerMaxHeight = 30
 	let tagbar_width           = 30
 	"""FileExplorer|TagList
-	let g:winManagerWindowLayout  = 'MiniBufExpl,NERDTree|TagList|Tagbar|Mru'
+	let g:winManagerWindowLayout  = 'MiniBufExpl,NERDTree|TagList'
+	" let g:winManagerWindowLayout  = 'NERDTree|TagList'
 	let g:WM_Auto_Exit_OnlyWindow = 1
 	let g:winManagerWidth         = 30 "设置winmanager的宽度，默认为25
 	" 自动退出winManager
 	autocmd bufenter * if (winnr("$") -- 2 && exists("b:NERDTreeType") &&b:NERDTreeType -- "primary")  | qa | endif 
 	nmap wm :WMToggle<cr>
+	" wincmd L  "winmanager 窗口在左侧显示"
 
-		function! NERDTree_Start()  
-			exec 'NERDTree'  
-		endfunction  
-		  
-		function! NERDTree_IsValid()  
-			return 1  
-		endfunction  
-			""" toggle showing the explorer plugins.
-			""function! <SID>ToggleWindowsManager()
-			""	if IsWinManagerVisible()
-			""		call s:CloseWindowsManager()
-			""	else
-			""		call s:StartWindowsManager()
-			""		exe 'q'
-			""	end
-			""endfunction
+	function! NERDTree_Start()  
+		exec 'NERDTree'  
+	endfunction  
+	  
+	function! NERDTree_IsValid()  
+		return 1  
+	endfunction  
+	""" toggle showing the explorer plugins.
+	"function! <SID>ToggleWindowsManager()
+	"	if IsWinManagerVisible()
+	"		call s:CloseWindowsManager()
+	"	else
+	"		call s:StartWindowsManager()
+	"		exe 'q'
+	"	end
+	"endfunction
 
 " for project
 "--------------------------------------------------------------------------
@@ -772,7 +785,7 @@ nmap <silent> <Leader>P <Plug>ToggleProject
 " -------------------------------------------------------------------------------------------------
 	nmap tb :Tagbar<cr>
 	let tagbar_ctags_bin  = '/usr/bin/ctags'
-	let tagbar_width      = 25
+	let tagbar_width      = 30
 	let g:tagbar_vertical = 30
 	let g:Tagbar_title    = "[Tagbar]"
 	function! Tagbar_Start()
@@ -819,11 +832,11 @@ nmap <silent> <Leader>P <Plug>ToggleProject
     \ "Unknown"   : "?"
     \ }	
 
-	"autocmd vimenter * NERDTree             " 自动开启NERDTree窗口
+	"autocmd vimenter * NERDTree             			" 自动开启NERDTree窗口
 	nnoremap nt :NERDTreeToggle<CR>:set rnu<cr>			" 设置nt调出窗口
 	autocmd bufenter * if (winnr("$") -- 1 && exists("b:NERDTreeType") &&b:NERDTreeType -- "primary") | q | endif " 别无其它时,一起关闭
 	"NERDTree快捷键
-	 	""-----------------------------------------------------------------
+		""-----------------------------------------------------------------
 		" o 打开关闭文件或者目录         t 在标签页中打开
 		" T 在后台标签页中打开           ! 执行此文件
 		" p 到上层目录                   P 到根目录
@@ -847,14 +860,14 @@ nmap <silent> <Leader>P <Plug>ToggleProject
 	" let Tlist_Use_SingleClick      = 1         			" 单击tag就跳转
 	let Tlist_Use_Left_Window        = 1          			" 在左侧窗口显示taglist窗口
 	let Tlist_Auto_Open              = 0               		" 启动VIM自动打开taglist
-	let g:Tlist_GainFocus_On_ToggleOpen = 0                 " 0:  打开Taglist时光标停留在原窗口  
-	" let Tlist_Close_On_Select      = 1         			" 选择tag后自动关闭taglist
-	" let Tlist_File_Fold_Auto_Close = 1					" 多文件时只显示当前文件的tag，其它的tag折叠" 非当前文件，函数列表折叠隐藏
-	let Tlist_WinHeight              = 200					" taglist窗口高度
-	let Tlist_WinWidth               = 20					" taglist窗口宽度
-	" let Tlist_Use_Horiz_Window     = 1					" 设置taglist窗口横向显示
-	let Tlist_Process_File_Always    = 1 					" 实时更新tags
-	nnoremap tl :TlistOpen<CR>								
+	let g:Tlist_GainFocus_On_ToggleOpen = 1                 	" 0:  打开Taglist时光标停留在原窗口  
+	let Tlist_Close_On_Select      	 = 0         			" 选择tag后自动关闭taglist
+	let Tlist_File_Fold_Auto_Close = 1				" 多文件时只显示当前文件的tag，其它的tag折叠" 非当前文件，函数列表折叠隐藏
+	let Tlist_WinHeight              = 200				" taglist窗口高度
+	let Tlist_WinWidth               = 30				" taglist窗口宽度
+	" let Tlist_Use_Horiz_Window     = 1				" 设置taglist窗口横向显示
+	let Tlist_Process_File_Always    = 1 				" 实时更新tags
+	nnoremap tl :TlistOpen<CR>					
 															" 设置tl调出taglist
 
 " for ctags 
@@ -896,17 +909,15 @@ nmap <silent> <Leader>P <Plug>ToggleProject
 " -------------------------------------------------------------------------------------------------
 	""""""""""""""""""""""""""""
 	" ------------------------------------------------------------------------------------------------=
-	let MRU_File='/root/.vim/config/_vim_mru_files'				" 把记录保存在哪
-	let MRU_Max_Entries=10											" 最多保存多少条记录
-	let MRU_Window_Height=8										" 设置MRU窗口高度
-	let MRU_Use_Current_Window=0									" 设置是否让MRU窗口独点一页
+	" let MRU_File='/root/.vim/config/_vim_mru_files'				" 把记录保存在哪
+	" let MRU_Max_Entries=10											" 最多保存多少条记录
+	" let MRU_Window_Height=8										" 设置MRU窗口高度
+	" let MRU_Use_Current_Window=0									" 设置是否让MRU窗口独点一页
 	"映射F2打开和关闭MRU窗口，bufloaded是判断缓冲是否加载
 	map <expr> <F2> bufloaded("__MRU_Files__")?"q":":MRU\<cr>" 
 	"
 " lookupfile.vim 插件设置
 " -------------------------------------------------------------------------------------------------
-	" lookupfile.vim 插件设置
-	"
 	let g:LookupFile_MinPatLength           = 2 "最少输入2个字符才开始查找
 	let g:LookupFile_PreserveLastPattern    = 0 "不保存上次查找的字符串
 	let g:LookupFile_PreservePatternHistory = 1 "保存查找历史
@@ -1004,9 +1015,8 @@ nnoremap <silent><F3> :Rgrep<CR>
 	    nmap <leader>sd :cs find d <C-R>=expand("<cword>")<CR><CR>:copen<CR>
 	endif
 
-" for syntastic  
+" for syntastic  " 多语言语法检查
 " -------------------------------------------------------------------------------------------------
-	" 多语言语法检查
 		"""Bundle 'scrooloose/syntastic'
 		set statusline+=%#warningmsg#
 		set statusline+=%{SyntasticStatuslineFlag()}
@@ -1029,9 +1039,8 @@ nnoremap <silent><F3> :Rgrep<CR>
 		let g:syntastic_enable_balloons = 1 "whether to show balloons
 		highlight SyntasticErrorSign guifg=white guibg=black
 
-" for YcmCompleterMe
+" for YcmCompleterMe " 代码自动补全
 " -------------------------------------------------------------------------------------------------
-	" 代码自动补全
 		"迄今为止用到的最好的自动VIM自动补全插件
 		"重启 :YcmRestartServer
 		""Bundle 'Valloric/YouCompleteMe'
@@ -1530,6 +1539,20 @@ inoremap <silent> <F4> <CR>/***
 	"
 " -------------------------------------------------------------------------------------------------
 "# 标记和移动
+	" .          " 最近编辑的位置
+	" 0-9        " 最近使用的文件
+	" ∧         " 最近插入的位置
+	" '          " 上一次跳转前的位置
+	" `          " 上一次退出文件时的位置
+	" [          " 上一次修改的开始处
+	" ]          " 上一次修改的结尾处
+	"# 命令小结
+	" m          " 创建标记
+	" '          " 移动到标记的文本行首
+	" `          " 移动到标记的光标位置
+	" :marks     " 列示所有标记
+	" :delmarks  " 删除指定标记
+	" :delmarks! " 删除所有标记
 	" \'.              : 跳到最后修改的那一行 (超级有用)(ft,怎么又是这个评价)
 	" `.               : 不仅跳到最后修改的那一行，还要定位到修改点
 	" <C-O>            : 依次沿着你的跳转记录向回跳 (从最近的一次开始)
@@ -1656,7 +1679,7 @@ inoremap <silent> <F4> <CR>/***
 	" 显示tab和空格
 	""set list " 设置tab和空格样式
 	set list lcs=tab:\¦\ ,nbsp:%,trail:- " 注意\后面有空格，设置完成后，按tab缩进即可。
-	highlight LeaderTab guifg=#666666    " 匹配行首tab
+	highlight LeaderTab ctermbg=black ctermfg=blue guifg=#666666    " 匹配行首tab
 	match LeaderTab /^\t/
 " --------------------------------------------------
 " [参考线切换] {{{
@@ -1718,7 +1741,6 @@ map <silent> <leader>reg :registers<cr>
 			" 一般安装插件的流程为，先BundleSearch一个插件，然后在列表中选中，按i安装
 			" 安装完之后，在vimrc中，添加Bundle 'XXX'，使得bundle能够加载，这个插件，同时如果
 			" 需要配置这个插件，也是在vimrc中设置即可
-
 			" ""原文链接：http://www.jianshu.com/p/0e85e7c9e543
 			" The following are examples of different formats supported.
 			" Keep Plugin commands between here and filetype plugin indent on.

@@ -17,3 +17,6 @@ There is an example in `:h tagbar-issues` about how to run ctags manually so you
 
 You can also have a look at ctags bugs that have previously been filed on Tagbar here:  
 https://github.com/majutsushi/tagbar/issues?labels=ctags-bug&page=1&state=closed
+
+
+Sun Oct 23 16:10:31 CST 2016
