@@ -1,11 +1,45 @@
  execute pathogen#infect() 
 " -------------------------------------------------------------------------
 " Description: 适合自己使用的vimrc文件，for Linux/Windows, GUI/Console
-" LastModified: 2016-Oct-24 11:21:32  CST
+" LastModified: 2016-Oct-29 12:45:45  CST
 " Version:     1.80
 " -------------------------------------------------------------------------
-"
-" ----------------------------------------------------------------------
+	" 安全操作:
+	"	
+		" vim -x file1  " 创建加密文档
+	" 查看配置信息:
+		" :set或者:se   " 显示所有修改过的配置
+		" :set all      " 显示所有的设定值
+		" :set option?  " 显示option的设定值
+		" :set nooption " 取消当期设定值
+		" :version      " 查看vim 的功能支持   "
+	" 查看按键映射:
+		":verbose map <所要查找的快捷键>  
+	" 视窗操作:
+	"	命令行模式下输入
+			":sp 1.txt "打开新的横向视窗来编辑1.txt
+			":vsp 2.txt "打开新的纵向视窗来编辑1.txt
+	" 普通模式下:
+		" Ctrl-w s " 将当前窗口分割成两个水平的窗口
+		" Ctrl-w v " 将当前窗口分割成两个垂直的窗口
+		" Ctrl-w q " 即 :q 结束分割出来的视窗。如果在新视窗中有输入需要使用强制符！即:q!
+		" Ctrl-w o " 打开一个视窗并且隐藏之前的所有视窗
+		" Ctrl-w j " 移至下面视窗
+		" Ctrl-w k " 移至上面视窗
+		" Ctrl-w h " 移至左边视窗
+		" Ctrl-w l " 移至右边视窗
+		" Ctrl-w J " 将当前视窗移至下面
+		" Ctrl-w K " 将当前视窗移至上面
+		" Ctrl-w H " 将当前视窗移至左边
+		" Ctrl-w L " 将当前视窗移至右边
+		" Ctrl-w - " 减小视窗的高度
+		" Ctrl-w + " 增加视窗的高度
+"" ----------------------------------------------------------------------
+
+
+
+
+
 " 启动pathogen[vim插件管理器]	2016-09-17
 " ----------------------------------------------------------------------
 filetype off
@@ -15,24 +49,79 @@ set nocompatible              " 关闭vi兼容模式 be iMproved, required
 	set rtp+=~/.vim/Bundle/vundle/
 	call vundle#rc()
 	Bundle 'gmarik/vundle'
+	"Bundle 插件管理相关用法
+		"Bundle 'vim-plugin-foo'
+		"Bundle 'vim-plugin-bar'
+		" :BundleList          - 列举出列表中(.vimrc中)配置的所有插件
+		" :BundleInstall       - 安装列表中全部插件
+		" :BundleInstall!      - 更新列表中全部插件
+		" :BundleSearch foo    - 查找foo插件
+		" :BundleSearch! foo   - 刷新foo插件缓存
+		" :BundleClean         - 清除列表中没有的插件
+		" :BundleClean!        - 清除列表中没有的插件
+		" :BundleList          - list configured bundles
+		" :BundleInstall(!)    - install(update) bundles
+		" :BundleSearch(!) foo - search(or refresh cache first) for foo
+		" :BundleClean(!)      - confirm(or auto                        - approve) removal of unused bundles
+		" vundle主要就是上面这个四个命令，例如BundleInstall是全部重新安装，BundleInstall!则是更新
+		" 一般安装插件的流程为，先BundleSearch一个插件，然后在列表中选中，按i安装
+		" 安装完之后，在vimrc中，添加Bundle 'XXX'，使得bundle能够加载，这个插件，同时如果
+		" 需要配置这个插件，也是在vimrc中设置即可
+		" ""原文链接：http://www.jianshu.com/p/0e85e7c9e543
+		" The following are examples of different formats supported.
+		" Keep Plugin commands between here and filetype plugin indent on.
+		" scripts on GitHub repos
 	"vim  相关插件
 		""'' Fugitive: Git 集成，强烈推荐！
-		" 插件Command-T是一个基于Ruby和C扩展实现的快速文件浏览的插件，类似TextMate的Go to File
-		" 插件winmanager可将nerdtree和taglist放到同一个”侧边栏”中，nerdtree在上方，taglist在下方
-		Bundle 'fholgado/minibufexpl.vim'
+		""" 插件Command-T是一个基于Ruby和C扩展实现的快速文件浏览的插件，类似TextMate的Go to File
+		""" 插件winmanager可将nerdtree和taglist放到同一个”侧边栏”中，nerdtree在上方，taglist在下方
+
+    "	rename.vim：在Vim中为文件重命名。
+    "	vim-coffee-script：在Vim中舒心 的编写、编译Coffeescript。
+    "	vim-mkdir：当你在Vim中新建文件的时候， 自动帮你创建不存在的目录。
+    "	vim-surround：快速的删除、修改和添加 括号、引号、XML标签等等。
+    "	matchit：用%去在两个对应的字符间跳转。
+    "	tComment：快速注释、反注释代码。
+    "	emmet-vim：Emmet的Vim版。
+    "	tabular：快速对齐。
+    "	snipmate.vim：快速的代码片段。
+    "	vim-easymotion：在文件中快速定位。
+    "	vim-instant-markdown：Vim中对 Markdown文档的实时预览。
+
+    "	delimitMate 用于补全括号和引号
+    "	vim-surround 用于快速切换括号/引号或者标签
+    "	GitGutter 实时显示git更改
+    "	Gitv 查看Git详细提交日志(类似gitk)
+    "	vim-commentary Vim批量注释工具, 可以注释多行和去除多行注释
+    "	indentLine 更加美观的显示缩进对齐线
+"	
+
+			
+		"Bundle 'minibufexpl.vim'
 		Bundle 'taglist.vim'
 		Plugin 'scrooloose/nerdtree'
 		Plugin 'Xuyuanp/nerdtree-git-plugin'
 		Bundle 'winmanager'
+		Plugin 'numbers.vim'
 		Plugin 'tpope/vim-fugitive'
 		"Plugin 'Lokaltog/vim-easymotion'
 		Plugin 'easymotion/vim-easymotion'
 		Plugin 'tpope/vim-rails.git'
 		Plugin 'godlygeek/tabular'
+		"Bundle "vim-scripts/TabBar"
 		Bundle 'majutsushi/tagbar.git'
+		Plugin 'tpope/vim-git'
+
+		Bundle 'Yggdroot/indentLine'
+		"Bundle 'gregsexton/gitv'
+		"Bundle 'airblade/vim-gitgutter'
+
 		Plugin 'vhda/verilog_systemverilog.vim'
-		"主题 molokai
+		"Plugin 'vim-airline'
+		"Bundle "Lokaltog/vim-powerline"
+		"""主题 molokai
 		Bundle 'tomasr/molokai'
+		Bundle 'css_color.vim'
 		Bundle 'altercation/vim-colors-solarized'
 		Bundle 'gorodinskiy/vim-coloresque' 
 		"Plugin 'Taverius/vim-colorscheme-manager'
@@ -41,49 +130,60 @@ set nocompatible              " 关闭vi兼容模式 be iMproved, required
 		Bundle 'bronson/vim-trailing-whitespace' 
 		Bundle 'genoma/vim-less'
 		Bundle 'fcitx.vim'
-		"插件fencview.vim来查看和自动识别文件的编码格式 
+		"""插件fencview.vim来查看和自动识别文件的编码格式 
 		Bundle 'FencView.vim'
-		Bundle 'kien/ctrlp.vim'
-		"Bundle 'vim-scripts/ctags.vim'
 		Bundle 'sukima/xmledit'
 		Bundle 'sjl/gundo.vim'
 		Bundle 'tpope/vim-repeat'
 		Bundle 'terryma/vim-multiple-cursors'
-		Bundle 'jiangmiao/auto-pairs'
 		Bundle 'klen/python-mode'
 		Bundle 'Valloric/ListToggle'
-		Bundle 'SirVer/ultisnips'
+		"""代码括号补全
+		" Bundle 'SirVer/ultisnips'
 		Bundle 'scrooloose/syntastic'
 		Bundle 't9md/vim-quickhl'
+		Bundle 'kien/ctrlp.vim'
+		Bundle 'ShowPairs'
+		Bundle 'jiangmiao/auto-pairs'
+		"Bundle 'SirVer/ultisnips'
+		"Bundle 'honza/vim-snippets'
+		"Bundle 'vim-scripts/ctags.vim'
 		"..................................
 		"" vim-scripts repos
-		" [YangkRing.vim]:
-		" 它可以将剪切板中的内容保存在文件中，这样你在一个窗口中复制的内容就可以在其他窗口中使用了。
-		" 非常适合在使用SecureCRT等类似远程连接工具中使用。
+		""" [YangkRing.vim]:
+		""" 它可以将剪切板中的内容保存在文件中，这样你在一个窗口中复制的内容就可以在其他窗口中使用了。
+		""" 非常适合在使用SecureCRT等类似远程连接工具中使用。
 		Bundle 'YankRing.vim'
+		Bundle 'mru.vim'
+
 		Bundle 'vcscommand.vim'
-		Bundle 'ShowPairs'
 		Bundle 'SudoEdit.vim'
 		Bundle 'EasyGrep'
 
 		Bundle 'L9'
 		Bundle 'Mark'
 		Bundle 'matrix.vim'
-		Bundle 'mru.vim'
 		Plugin 'project.vim'
 		"Bundle 'project.vim'
 		Bundle 'restart.vim'
 		Bundle 'templates.vim'
 		"Bundle 'vimim.vim'
 		Bundle 'ZenCoding.vim'
-		Bundle 'css_color.vim'
-		"Bundle "vim-scripts/TabBar"
 	""""""""""""""""""""""""""""""""""""""""
-filetype on
-filetype plugin on
+filetype on								" 开启文件类型监测
+filetype plugin on						" 开启文件类型插件
 filetype plugin indent on
-syntax enable
-syntax on                   " 自动语法高亮
+	set wildmode=list:longest			" 命令行模式下一般情况按tab键可以补全当前命令，但是无法显示所有匹配的命令或文件名。
+	set wildmenu						" 增强模式中的命令行自动完成操作 补全
+	autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+	autocmd FileType python     set omnifunc=pythoncomplete#Complete
+	autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+	autocmd FileType html       set omnifunc=htmlcomplete#CompleteTags
+	autocmd FileType css        set omnifunc=csscomplete#CompleteCSS
+	autocmd FileType xml        set omnifunc=xmlcomplete#CompleteTags
+	autocmd FileType java       set omnifunc=javacomplete#Complet
+syntax enable							" 开启简单的语法监测
+syntax on								" 开启自动语法高亮
 
 " -------------------------------------------------------------------------------------------------
 """ return OS type, eg: windows, or linux, mac, etc...
@@ -161,7 +261,7 @@ else
     echoerr "Sorry, this version of (g)vim was not compiled with +multi_byte"
 endif
 
-"编码设置
+" 字体编码设置
 "----------------------------------------------------------------
 	set encoding=utf-8 			" 语言环境
 	" 设置字符编码列表
@@ -316,7 +416,6 @@ let mapleader=','
 	set ruler                   " 打开状态栏标尺
 	set softtabstop=4           " 使得按退格键时可以一次删掉 4 个空格
 	"set autochdir               " 自动切换当前目录为当前文件所在的目录
-	set backupcopy=yes          " 设置备份时的行为为覆盖
 	set ignorecase smartcase    " 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
 	set nowrapscan              " 禁止在搜索到文件两端时重新搜索
 	set incsearch               " 输入搜索内容时就显示搜索结果
@@ -342,13 +441,18 @@ let mapleader=','
 	set selectmode=mouse,key		 " 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）  
 	set shellcmdflag=-c				" vimdiff 无法使用问题
 	set showmatch					" 设置匹配模式，高亮显示匹配的括号
+	set showtabline=1				" 显示标签页菜单
+	" set softtabstop=4					" 使得按退格键时可以一次删除4个空格
 	set matchtime=5					" 匹配括号高亮的时间（单位是十分之一秒）   
 	set shiftwidth=4					" 缩进所表示的空格数(不同于TAB，是利用>>缩进的大小，自动缩进也看这个值)
-	" set softtabstop=4					" 使得按退格键时可以一次删除4个空格
-	set scrolloff=5						" 设定光标离窗口上下边界3行时窗口自动滚动
+	set scrolloff=3						" 设定光标离窗口上下边界3行时窗口自动滚动
 	"-------------------------------------
 	" The following are commented out as they cause vim to behave a lot
 	set autowrite					" 自动把内容写回文件: 如果文件被修改过，
+	"set backupcopy=no				" 设置备份时的行为为覆盖
+	" set nobackup						" 覆盖文件时不备份
+	"set backup						" 覆盖文件时不备份
+	"set backupdir=~/tmp/backup/vimrcbak	"指定配置文件的备份路径
 	" 在每个 :next、:rewind、:last、:first、:previous、:stop、:suspend、:tag、:!、:make、CTRL-] 和 CTRL-^命令时进行；
 	" 用 :buffer、CTRL-O、CTRL-I、'{A-Z0-9} 或 `{A-Z0-9} 命令转到别的文件时亦然。
 
@@ -358,8 +462,6 @@ let mapleader=','
 	set numberwidth=3
 	set relativenumber				" set rnu [nornu]相对行号，可用Ctrl+n在相对/绝对行号间切换
 "--命令行设置--
-	set wildmenu                " 增强模式中的命令行自动完成操作 补全
-	set wildmode=list:longest			" 命令行模式下一般情况按tab键可以补全当前命令，但是无法显示所有匹配的命令或文件名。
 	set cmdheight=1						" 设定命令行的行数为1
 	set wrap							" 自动换行显示
 	set showcmd						" 在状态栏显示目录所执行的指定，未完成的指令片段也会显示出来
@@ -374,7 +476,6 @@ let mapleader=','
 	" set expandtab						" 将tab键转换为空格
 	  set history=100						" 设置冒号命令和搜索命令历史列表长度为50
 	  set undolevels=5000
-	" set nobackup						" 覆盖文件时不备份
 	" set nolinebreak					" 在单词中间断行
 	  set tabstop=4						" TAB键所表示的空格数(这个值只能管tab，不管缩进)
 	"----------------------------------------------------------------------------------------
@@ -424,44 +525,44 @@ let mapleader=','
 		""diff              对没有更改的文本进行折叠
 		""marker            对文中的标志折叠
 	""基本操作:
-		"zi 打开关闭折叠
-		"zv 查看此行
-		"zm 关闭折叠
-		"zM 关闭所有
-		"zr 打开
-		"zR 打开所有
-		"zc 折叠当前行
-		"zo 打开当前折叠
-		"zd 删除折叠
-		"zD 删除所有折叠
-		"如果使用了indent方式，vim会自动的对大括号的中间部分进行折叠，我们可以直接使用这些现成的折叠成果。
-		"在可折叠处（大括号中间）：
-		"zc       折叠
-		"zC       对所在范围内所有嵌套的折叠点进行折叠
-		"zo       展开折叠
-		"zO       对所在范围内所有嵌套的折叠点展开
-		"[z       到当前打开的折叠的开始处。
-		"]z       到当前打开的折叠的末尾处。
-		"zj       向下移动。到达下一个折叠的开始处。关闭的折叠也被计入。
-		"zk      向上移动到前一折叠的结束处。关闭的折叠也被计入。
-		"当使用marker方式时，需要用标计来标识代码的折叠，系统默认是{{{和}}}，最好不要改动之：）
-		"我们可以使用下面的命令来创建和删除折叠：
-		"zf      创建折叠，比如在marker方式下：
-		"zf56G，创建从当前行起到56行的代码折叠；
-		"10zf或10zf+或zf10↓，创建从当前行起到后10行的代码折叠。
-		"10zf-或zf10↑，创建从当前行起到之前10行的代码折叠。
-		"在括号处zf%，创建从当前行起到对应的匹配的括号上去（（），{}，[]，<>等）。
-		"zd      删除 (delete) 在光标下的折叠。仅当 'foldmethod' 设为 "manual" 或 "marker" 时有效。
-		"zD     循环删除 (Delete) 光标下的折叠，即嵌套删除折叠。
-		"仅当 'foldmethod' 设为 "manual" 或 "marker" 时有效。
-		"zE     除去 (Eliminate) 窗口里“所有”的折叠。
-		"仅当 'foldmethod' 设为 "manual" 或 "marker" 时有效。
-		"用 zm, zr 这两个指令来增加或减少折叠的层数,级别越高的折叠的越深（即越不容易被显示）
-		"
-		"手动折叠:
-		"	:mkview		"保存手动创建的折叠视图"
-		"	:loadview	"加载保存的视图"
-"---------------------------------------------------------------------------------
+		" zi 打开关闭折叠
+		" zv 查看此行
+		" zm 关闭折叠
+		" zM 关闭所有
+		" zr 打开
+		" zR 打开所有
+		" zc 折叠当前行
+		" zo 打开当前折叠
+		" zd 删除折叠
+		" zD 删除所有折叠
+		" 如果使用了indent方式，vim会自动的对大括号的中间部分进行折叠，我们可以直接使用这些现成的折叠成果。
+		" 在可折叠处（大括号中间）：
+		" zc       折叠
+		" zC       对所在范围内所有嵌套的折叠点进行折叠
+		" zo       展开折叠
+		" zO       对所在范围内所有嵌套的折叠点展开
+		" [z       到当前打开的折叠的开始处。
+		" ]z       到当前打开的折叠的末尾处。
+		" zj       向下移动。到达下一个折叠的开始处。关闭的折叠也被计入。
+		" zk      向上移动到前一折叠的结束处。关闭的折叠也被计入。
+		" 当使用marker方式时，需要用标计来标识代码的折叠，系统默认是{{{和}}}，最好不要改动之：）
+		" 我们可以使用下面的命令来创建和删除折叠：
+		" zf      创建折叠，比如在marker方式下：
+		" zf56G，创建从当前行起到56行的代码折叠；
+		" 10zf或10zf+或zf10↓，创建从当前行起到后10行的代码折叠。
+		" 10zf-或zf10↑，创建从当前行起到之前10行的代码折叠。
+		" 在括号处zf%，创建从当前行起到对应的匹配的括号上去（（），{}，[]，<>等）。
+		" zd      删除 (delete) 在光标下的折叠。仅当 'foldmethod' 设为 "manual" 或 "marker" 时有效。
+		" zD     循环删除 (Delete) 光标下的折叠，即嵌套删除折叠。
+		" 仅当 'foldmethod' 设为 "manual" 或 "marker" 时有效。
+		" zE     除去 (Eliminate) 窗口里“所有”的折叠。
+		" 仅当 'foldmethod' 设为 "manual" 或 "marker" 时有效。
+		" 用 zm, zr 这两个指令来增加或减少折叠的层数,级别越高的折叠的越深（即越不容易被显示）
+		" 
+		" 手动折叠:
+		" 	:mkview		"保存手动创建的折叠视图"
+		" 	:loadview	"加载保存的视图"
+"-------- -------------------------------------------------------------------------
 
 "设置命令行和状态栏
 	set laststatus=2					" 显示状态栏(默认值为1，无法显示状态栏)
@@ -511,13 +612,13 @@ endfunction
 	 set statusline+=\ %t                " 当前文件名(无路径)                    "
 	 set statusline+=[%M%r%h%w]          " 是否有修改,可读,帮助文档,预览窗口            "
 	 set statusline+=\ \|                " 个性'|'分隔符                 "
+	 set statusline+=\ %{fugitive#statusline()}							" 当前目录在git的路径
 	 set statusline+=\ \PWD:\%{CurDir()} " 当前文件路径                  "
-	 set statusline+=%=                  " 左右对齐分隔符,中间留空       "
-	 set statusline+=%<                  " 当位置不足时,此后部分可以隐去 "
+	 set statusline+=\%=                  " 左右对齐分隔符,中间留空       "
+	 set statusline+=\%<                  " 当位置不足时,此后部分可以隐去 "
 	 set statusline+=\ %3c               " 光标所在列号                  "
 	 set statusline+=\ %2p%%             " 光标行位置百分比              "
 	 set statusline+=\ [%l/%L]           " 光标所在行号/文件总行数       "
-	 set statusline+=\ %{fugitive#statusline()}
 	 set statusline+=\ P:%o              " 光标所在字符数                "
 	 set statusline+=\ \|                " 分隔符'|'                     "
 	 set statusline+=\ %{&fileformat}    " 文件系统类型                  "
@@ -540,7 +641,7 @@ endfunction
 """""""""""""""""""""""""""""""""""
 """    状态栏样式之二:
 """""""""""""""""""""""""""""""""""
-"set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\ " 设置在状态行显示的信息
+" set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\ " 设置在状态行显示的信息
 "
 """""""""""""""""""""""""""""""""""
 """    状态栏样式之三:
@@ -594,65 +695,77 @@ nnoremap <silent> <CR> :nohlsearch<CR><CR>
 "--------------------------------------------------------------------------
 "vim-airline
 "--------------------------------------------------------------------------
-	"Plugin 'vim-airline'    
-	 "let g:airline_theme="molokai" 
+		"Plugin 'vim-airline'    
+		 "let g:airline_theme="molokai" 
+	
+		set laststatus=2   	" //使得状态栏和命令行分开Always show the statusline
+		set encoding=utf-8 	" Necessary to show Unicode glyphs
+		set t_Co=256 		" Explicitly tell Vim that the terminal supports 256 colors
+		let g:molokai_original = 1
+		" 设置consolas字体"前面已经设置过
+		" set guifont=Consolas\ for\ Powerline\ FixedD:h11
+	
+		if !exists('g:airline_symbols')
+			let g:airline_symbols = {}
+		endif
+		" 关闭状态显示空白符号计数
+		let g:airline#extensions#whitespace#enabled     = 0
+		let g:airline#extensions#whitespace#symbol      = '!'
+		" 使用powerline打过补丁的字体
+		let g:airline_powerline_fonts                   = 1
+		" 开启tabline
+		let g:airline#extensions#tabline#enabled        = 1
+		" tabline中当前buffer两端的分隔字符
+		let g:airline#extensions#tabline#left_sep       = ' '
+		" tabline中未激活buffer两端的分隔字符
+		let g:airline#extensions#tabline#left_alt_sep   = '|'
+		" tabline中buffer显示编号
+		let g:airline#extensions#tabline#buffer_nr_show = 1
+		let g:airline#extensions#tagbar#enabled         = 1
+		let g:airline#extensions#syntastic#enabled      = 1
 
-	set laststatus=2   	" //使得状态栏和命令行分开Always show the statusline
-	set encoding=utf-8 	" Necessary to show Unicode glyphs
-	set t_Co=256 		" Explicitly tell Vim that the terminal supports 256 colors
-	let g:molokai_original = 1
-	" 设置consolas字体"前面已经设置过
-	set guifont=Consolas\ for\ Powerline\ FixedD:h11
-
-	if !exists('g:airline_symbols')
-		let g:airline_symbols = {}
-	endif
-	" 关闭状态显示空白符号计数
-	let g:airline#extensions#whitespace#enabled     = 0
-	let g:airline#extensions#whitespace#symbol      = '!'
-	" 使用powerline打过补丁的字体
-	let g:airline_powerline_fonts                   = 1
-	" 开启tabline
-	let g:airline#extensions#tabline#enabled        = 1
-	" tabline中当前buffer两端的分隔字符
-	let g:airline#extensions#tabline#left_sep       = ' '
-	" tabline中未激活buffer两端的分隔字符
-	let g:airline#extensions#tabline#left_alt_sep   = '|'
-	" tabline中buffer显示编号
-	let g:airline#extensions#tabline#buffer_nr_show = 1
-	let g:airline#extensions#tagbar#enabled         = 1
-	let g:airline#extensions#syntastic#enabled      = 1
-
-" " ----------------------------airline config end -----------------------------"
-" unicode symbols
-	let g:airline_left_sep           = '▶'
-	let g:airline_right_sep          = '◀'
-	let g:airline_left_alt_sep       = '❯'
-	let g:airline_right_alt_sep      = '❮'
-	let g:airline_symbols.linenr     = '␤'
-	let g:airline_symbols.branch     = '⎇'
-	let g:airline_symbols.paste      = 'ρ'
-	let g:airline_symbols.whitespace = 'Ξ'
-	let g:airline_symbols.readonly   = ''
+	"" unicode symbols
+		 let g:airline_left_sep           = '▶'
+		 let g:airline_right_sep          = '◀'
+		 let g:airline_left_alt_sep       = '❯'
+		 let g:airline_right_alt_sep      = '❮'
+		 let g:airline_symbols.linenr     = '␤'
+		 let g:airline_symbols.branch     = '⎇'
+		 let g:airline_symbols.paste      = 'ρ'
+		 let g:airline_symbols.whitespace = 'Ξ'
+		 let g:airline_symbols.readonly   = ''
 
 "--------------------------------------------------------------------------
-"''"快捷键"配色方案
-"color
-" Aliceblue        " Antiquewhite  " Aqua           " Aquamarine     " Azure          " Beige                " Bisque            " Black           " Blanchedalmond  " Blue
-" Blueviolet       " Brown         " Burlywood      " Cadetblue      " Chartruse      " Chocolate            " Coral             " Cornflowerblue  " Cornsilk        " Crimson
-" Cyan             " Darkblue      " Darkcyan       " Darkgoldenrod  " Darkgray       " Darkgreen            " Darkkhaki         " Darkmagenta     " Darkolivegreen  " Darkorange
-" Darkorchid       " Darksalmon    " Darkseagreen   " Darkslateblue  " Darkslategray  " Darkturquoise        " Darkviolet        " Deeppink        " Deepskyblue     " Dimgray
-" Dodgerblue       " Firebrick     " Floralwhite    " Forestgreen    " Fuchsia        " Gainsboro            " Ghostwhite        " Gold            " Goldenrod       " Gray
-" Green            " Greenyellow   " Honeydew       " Hotpink        " Indianred      " Indigo               " Ivory             " Khaki           " Lavender        " Lavenderblush
-" lawngreen        " Lemonchiffon  " Lightblue      " Lightcoral     " Lightcyan      " Lightgoldenrodyellow " Lightgreen        " Lightgrey       " Lightpink       " Lightsalmon
-" Lightseagreen    " Lightskyblue  " Lightslategray " Lightsteelblue " Lightyellow    " Lime                 " Limegreen         " Linen           " Magenta         " Maroon
-" Mediumaquamarine " Mediumblue    " Mediumorchid   " Mediumpurple   " Mediumseagreen " Mediumslateblue      " Mediumspringgreen " Mediumturquoise " Mediumvioletred " Midnightblue
-" Mintcream        " Mistyrose     " Moccasin       " Navajowhite    " Navy           " Oldlace              " Olive             " Olivedrab       " Orange          " Orangered
-" Orchid           " Palegoldenrod " Palegreen      " Paleturquoise  " Palevioletred  " Papayawhip           " Peachpuff         " Peru            " Pink            " Plum
-" Powderblue       " Purple        " Red            " Rosybrown      " Royalblue      " Saddlebrown          " Salmon            " Sandybrown      " Seagreen        " Seashell
-" Sienna           " Silver        " Skyblue        " Slateblue      " Slategray      " Snow                 " Springgreen       " Steelblue       " Tan             " Teal
-" Thistle          " Tomato        " Turquoise      " Violet         " Wheat          " White                " Whitesmoke        " Yellow          " Yellowgreen
+" color scheme "配色方案
+		" Aliceblue        " Antiquewhite  " Aqua           " Aquamarine     " Azure          " Beige                " Bisque            " Black           " Blanchedalmond  " Blue
+		" Blueviolet       " Brown         " Burlywood      " Cadetblue      " Chartruse      " Chocolate            " Coral             " Cornflowerblue  " Cornsilk        " Crimson
+		" Cyan             " Darkblue      " Darkcyan       " Darkgoldenrod  " Darkgray       " Darkgreen            " Darkkhaki         " Darkmagenta     " Darkolivegreen  " Darkorange
+		" Darkorchid       " Darksalmon    " Darkseagreen   " Darkslateblue  " Darkslategray  " Darkturquoise        " Darkviolet        " Deeppink        " Deepskyblue     " Dimgray
+		" Dodgerblue       " Firebrick     " Floralwhite    " Forestgreen    " Fuchsia        " Gainsboro            " Ghostwhite        " Gold            " Goldenrod       " Gray
+		" Green            " Greenyellow   " Honeydew       " Hotpink        " Indianred      " Indigo               " Ivory             " Khaki           " Lavender        " Lavenderblush
+		" lawngreen        " Lemonchiffon  " Lightblue      " Lightcoral     " Lightcyan      " Lightgoldenrodyellow " Lightgreen        " Lightgrey       " Lightpink       " Lightsalmon
+		" Lightseagreen    " Lightskyblue  " Lightslategray " Lightsteelblue " Lightyellow    " Lime                 " Limegreen         " Linen           " Magenta         " Maroon
+		" Mediumaquamarine " Mediumblue    " Mediumorchid   " Mediumpurple   " Mediumseagreen " Mediumslateblue      " Mediumspringgreen " Mediumturquoise " Mediumvioletred " Midnightblue
+		" Mintcream        " Mistyrose     " Moccasin       " Navajowhite    " Navy           " Oldlace              " Olive             " Olivedrab       " Orange          " Orangered
+		" Orchid           " Palegoldenrod " Palegreen      " Paleturquoise  " Palevioletred  " Papayawhip           " Peachpuff         " Peru            " Pink            " Plum
+		" Powderblue       " Purple        " Red            " Rosybrown      " Royalblue      " Saddlebrown          " Salmon            " Sandybrown      " Seagreen        " Seashell
+		" Sienna           " Silver        " Skyblue        " Slateblue      " Slategray      " Snow                 " Springgreen       " Steelblue       " Tan             " Teal
+		" Thistle          " Tomato        " Turquoise      " Violet         " Wheat          " White                " Whitesmoke        " Yellow          " Yellowgreen
+		"
+	" 配置说明符
+		" Cursor        " 光标下的字符颜色    
+		" CursorLine    " 光标所在行颜色    
+		" ErrorMsg      " 命令行出现的错误信息提示    
+		" IncSearcg     " 被搜索字符的颜色    
+		" Normal        " 普通字符    
+		" Pmenu         " 弹出的提示条目颜色    
+		" PmenuSel      " 弹出的提示条目中被选中条目的颜色    
+		" SpellBad      " 拼写错误字符颜色    
+		" Visual        " 可视化模式下选中字符的颜色    
+		" Menu          " 菜单栏的颜色字体    
+		" Scrollbar     " 滚动条的颜色
 "--------------------------------------------------------------------------
+"
 " -------------------------------------------------------------------------------------------------
 " for winManager
 " -------------------------------------------------------------------------------------------------
@@ -758,8 +871,8 @@ nmap <silent> <Leader>P <Plug>ToggleProject
 	 fun! FixMiniBufExplorerTitle()
 		 if "-MiniBufExplorer-" == bufname("%")
 			 setlocal statusline=%-3.3n%1*\|%*
-			 setlocal statusline+=\[\-Mini\ Buffers\ Explorer\-\]
-			 setlocal statusline+=%=\ %1*\|%*\ %<%P
+			" setlocal statusline+=\[\-Mini\ Buffers\ Explorer\-\]
+			 "setlocal statusline+=%=\ %1*\|%*\ %<%P
 			 setlocal hi StatusLine cterm=none  ctermfg=black ctermbg=blue
 	         setlocal hi LineNr  ctermfg=yellow  ctermbg=blue guifg=red        "行号列"
 		 endif
@@ -772,7 +885,12 @@ nmap <silent> <Leader>P <Plug>ToggleProject
 	"  \ %1*\|%*\  （和之前一样，分隔符）
 	"  %< (当窗口宽度不足显示全部状态栏时，此 item 之后部分可隐藏)
 	"  %P （显示文件位置百分比）
-"""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""
+	   " :MiniBufExplorer  " ,mbe
+	   " :CMiniBufExplorer " ,mbc
+	   " :UMiniBufExplorer " ,mbu
+	   " :TMiniBufExplorer " ,mbt
+
 	"----- ------------------------------------------------------------
 	" plugin - bufexplorer.vim Buffers切换
 	" \be 全屏方式查看全部打开的文件列表
@@ -1086,13 +1204,40 @@ nnoremap <silent><F3> :Rgrep<CR>
 	" edit history, 可以查看回到某个历史状态
 	"Bundle 'sjl/gundo.vim'
 	nnoremap <leader>h :GundoToggle<CR>
+	"
+ 
+" for indentLine  ""这个插件安装成功后就会显示缩进对齐线
+" -------------------------------------------------------------------------------------------------
+map <leader>il :IndentLinesToggle<CR>
+"--------------------------------------------------------------------------
+" 特殊符号的显示
+"--------------------------------------------------------------------------
+	" 去折叠行横线'-'
+	"se fcs=vert:\ 
+	" 换折叠行符号为下横线'_'
+	se fcs=vert:\|,fold:_
+	" 对齐中的TAB 与 SPACE;
+	" 设置将Tab显示为|(竖线)，将行尾的空格显示为-(减号)
+	" 显示tab和空格
+	""set list " 设置tab和空格样式
+	"在被分割的窗口间显示空白，便于阅读
+	set fillchars=vert:\| ,stl: ,stlnc:  
+	"set list lcs=tab:\¦ ,nbsp:% ,trail:= " 注意\后面有空格，设置完成后，按tab缩进即可。
+	highlight LeaderTab ctermbg=black ctermfg=blue guifg=#666666    " 匹配行首tab
+	match LeaderTab /^\t/
+	""set list!  """显示/隐藏 TAB键以及空格等不可见字符
+	"set list		""显示/隐藏 TAB键以及空格等不可见字符
+	"set listchars=tab:>-,eol:$		""将TAB设为>---可见字符
+	"	有关的帮助入口：
+
+	"	:tab h 'fcs'
+	"	:tab h 'foldtext'
+"
 
 " for Ultisnips
 " -------------------------------------------------------------------------------------------------
 	" 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
-	""Bundle 'SirVer/ultisnips'
 	"" Snippets are separated from the engine. Add this if you want them:
-	"Bundle 'honza/vim-snippets'
 
 
 		let g:UltiSnipsExpandTrigger       = "<tab>"
@@ -1223,10 +1368,10 @@ nnoremap <silent><F3> :Rgrep<CR>
 		"--可以用下面这条命令
 		"""--->>>:verbose map <C-H>
 		" 查找vim中某个键映射的定义：
-		":verbose map <所要查找的快捷键>  
-	"----------------------------------------------------------------------=
-	"		标识符		含义			等价于			十进制数值		~
-	"-----------------------------------------------------------------------
+		":verbose 命map <所要查找的快捷键>  
+	"-------------命---------------------------------------------------------=
+	"		标识符命		含义			等价于			十进制数值		~
+	"-------------" ----------------------------------------------------------
 		"	<Nul>        零            CTRL-@     0 (存储为 10) *<Nul>*
 		"	<BS>        退格键            CTRL-H     8    *backspace*
 		"	<Tab>        制表符            CTRL-I     9    *tab* *Tab*
@@ -1304,7 +1449,6 @@ nnoremap <silent><F3> :Rgrep<CR>
 "在打开编辑器时，如果不需要补全功能，可以按shift+tab
 let g:SuperTabMappingForward = "<tab>"
 let g:SuperTabMappingBackward= "s-tab"
-""set list!  "显示/隐藏 TAB键以及空格等不可见字符：
 " -------------------------------------------------------------------------------------------------
 " 删除替换
 " -------------------------------------------------------------------------------------------------
@@ -1444,9 +1588,9 @@ nnoremap <silent> <F9> :wq<CR> :! gcc -g  -Wall -o <c-r>=expand("%:p:r")<cr>  <c
 " -------------------------------------------------------------------------------------------------
 " 添加自定义代码段.
 " -------------------------------------------------------------------------------------------------
-" 敲,ma 插入最基本的C语言代码.
+" [C] main 函数代码块.
 	nnoremap ,ma i#include <stdio.h><CR><CR>int main(int argc, char *argv[])<CR>{<CR>return 0;<ESC>v=o}<ESC>v=kO
-
+" [C] switch-case代码块
 " -------------------------------------------------------------------------------------------------
 " 添加函数说明信息
 " -------------------------------------------------------------------------------------------------
@@ -1494,6 +1638,20 @@ inoremap <silent> <F4> <CR>/***
 	"inoremap <silent> <F5> <ESC>O
 	"			\#if 0    // madao Comment Start <C-R>=GetDateTime()<ESC><ESC>o
 	"		 	\#endif   // madao Comment End   <C-R>=GetDateTime()<ESC><ESC>O
+	"
+	"
+""Python 注释
+	" function InsertPythonComment()
+	"     exe 'normal'.1.'G'
+	"     let line = getline('.')
+	"     if line =~ '^#!.*$' || line =~ '^#.*coding:.*$'
+	"         return
+	"     endif
+	"     normal O
+	"     call setline('.', '#!/usr/bin/env python')
+	"     normal o
+	"     call setline('.', '# -*- coding:utf-8 -*-')
+	"     normal o ...
 " -------------------------------------------------------------------------------------------------
 " 括号自动补全之一: (,",',{,［
 	nnoremap  <silent>  { i{}<ESC>i
@@ -1573,19 +1731,23 @@ inoremap <silent> <F4> <CR>/***
 	" dt”, yt”, ct”, vt” 从当前字符开始删除(复制,改变,选中),直到遇到”之前
 " -------------------------------------------------------------------------------------------------
 "# 翻页与移动:
-	" 整页翻页 ctrl-f ctrl-b
-	" f就是forword b就是backward
+	" 整页翻页:
+	"	ctrl-f 
+	"	ctrl-b
+	"	f=forword b=backward
 	" 
-	" 翻半页
-	" ctrl-d ctlr-u
-	" d=down u=up
+	" 翻半页:
+	"	ctrl-d 
+	"	ctlr-u
+	"	d=down u=up
 	" 
-	" 滚一行
-	" ctrl-e ctrl-y
-	" 
-	" zz 让光标所杂的行居屏幕中央
-	" zt 让光标所杂的行居屏幕最上一行 t=top
-	" zb 让光标所杂的行居屏幕最下一行 b=bottom
+	" 滚一行:
+	"	ctrl-e 
+	"	ctrl-y
+	"
+	" zz 让光标所在的行居屏幕中央
+	" zt 让光标所在的行居屏幕最上一行 t=top
+	" zb 让光标所在的行居屏幕最下一行 b=bottom
 	" 
 	"
 " -------------------------------------------------------------------------------------------------
@@ -1669,21 +1831,9 @@ inoremap <silent> <F4> <CR>/***
 	let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
 "--------------------------------------------------------------------------
 
-" 特殊符号的显示
-	" 去折叠行横线'-'
-	se fcs=vert:\|
-	" 换折叠行横线'_'
-	se fcs=vert:\|,fold:_
-	" 对齐中的TAB 与 SPACE;
-	" 设置将Tab显示为|(竖线)，将行尾的空格显示为-(减号)
-	" 显示tab和空格
-	""set list " 设置tab和空格样式
-	set list lcs=tab:\¦\ ,nbsp:%,trail:- " 注意\后面有空格，设置完成后，按tab缩进即可。
-	highlight LeaderTab ctermbg=black ctermfg=blue guifg=#666666    " 匹配行首tab
-	match LeaderTab /^\t/
-" --------------------------------------------------
+"--------------------------------------------------------------------------
 " [参考线切换] {{{
-" --------------------------------------------------
+"--------------------------------------------------------------------------
 fu! ReferenceLine(t)
     let ccnum = &cc
     if ccnum -- '' | let ccnum = 0 | en
@@ -1700,20 +1850,22 @@ nn <silent> <A-u> :call ReferenceLine('sub')<CR>
 nn <silent> <A-o> :call ReferenceLine('add')<CR>
 " }}}
 
+"--------------------------------------------------------------------------
 "快速打开编辑 .vimrc配置文件--->",ee"
-map <silent> <leader>ee :e ~/.vimrc<cr>
-"快速保存文件--->",w"
-" nmap <leader>z :w<CR>
-" nmap <leader>e :q<CR>
-" map <silent> <leader>w :w<cr>
-"快速保存并退出文件--->",w"
-map <silent> <leader>wq :wqall!<cr>
-map <silent> <leader>z :w<cr>
-map <silent> <leader>reg :registers<cr>
-"nnoremap <CR> G       "通过 12<Enter> 跳转到第 12 行 （12G 我觉得不称手）
+"--------------------------------------------------------------------------
+	map <silent> <leader>ee :e ~/.vimrc<cr>
+	"快速保存文件--->",w"
+	" nmap <leader>z :w<CR>
+	" nmap <leader>e :q<CR>
+	" map <silent> <leader>w :w<cr>
+	"快速保存并退出文件--->",w"
+	map <silent> <leader>wq :wqall!<cr>
+	map <silent> <leader>z :w<cr>
+	map <silent> <leader>reg :registers<cr>
+	"nnoremap <CR> G       "通过 12<Enter> 跳转到第 12 行 （12G 我觉得不称手）
 
-" vp doesn't replace paste buffer
-" 避免缓冲区的内容被删除的文本内容所覆盖（放到~/.vimrc文件的最后）
+	" vp doesn't replace paste buffer
+	" 避免缓冲区的内容被删除的文本内容所覆盖（放到~/.vimrc文件的最后）
 	function! RestoreRegister()
 	  let @" = s:restore_reg
 	  return ''
@@ -1723,25 +1875,3 @@ map <silent> <leader>reg :registers<cr>
 	  return "p@=RestoreRegister()<cr>"
 	endfunction
 	vmap <silent> <expr> p <sid>Repl()
-		"Bundle 插件管理相关用法
-			"Bundle 'vim-plugin-foo'
-			"Bundle 'vim-plugin-bar'
-			" :BundleList          - 列举出列表中(.vimrc中)配置的所有插件
-			" :BundleInstall       - 安装列表中全部插件
-			" :BundleInstall!      - 更新列表中全部插件
-			" :BundleSearch foo    - 查找foo插件
-			" :BundleSearch! foo   - 刷新foo插件缓存
-			" :BundleClean         - 清除列表中没有的插件
-			" :BundleClean!        - 清除列表中没有的插件
-			" :BundleList          - list configured bundles
-			" :BundleInstall(!)    - install(update) bundles
-			" :BundleSearch(!) foo - search(or refresh cache first) for foo
-			" :BundleClean(!)      - confirm(or auto                        - approve) removal of unused bundles
-			" vundle主要就是上面这个四个命令，例如BundleInstall是全部重新安装，BundleInstall!则是更新
-			" 一般安装插件的流程为，先BundleSearch一个插件，然后在列表中选中，按i安装
-			" 安装完之后，在vimrc中，添加Bundle 'XXX'，使得bundle能够加载，这个插件，同时如果
-			" 需要配置这个插件，也是在vimrc中设置即可
-			" ""原文链接：http://www.jianshu.com/p/0e85e7c9e543
-			" The following are examples of different formats supported.
-			" Keep Plugin commands between here and filetype plugin indent on.
-			" scripts on GitHub repos
