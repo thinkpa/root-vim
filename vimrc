@@ -1,7 +1,7 @@
  execute pathogen#infect() 
 " -------------------------------------------------------------------------
 " Description: 适合自己使用的vimrc文件，for Linux/Windows, GUI/Console
-" LastModified: 2016-Oct-29 12:45:45  CST
+" LastModified: 2016-Nov-04 06:37:00  CST
 " Version:     1.80
 " -------------------------------------------------------------------------
 	" 安全操作:
@@ -17,8 +17,9 @@
 		":verbose map <所要查找的快捷键>  
 	" 视窗操作:
 	"	命令行模式下输入
-			":sp 1.txt "打开新的横向视窗来编辑1.txt
-			":vsp 2.txt "打开新的纵向视窗来编辑1.txt
+			":sp 1.txt  " 打开新的横向视窗来编辑1.txt
+			":vsp 2.txt " 打开新的纵向视窗来编辑1.txt
+			"q:         " vim显示历史命令
 	" 普通模式下:
 		" Ctrl-w s " 将当前窗口分割成两个水平的窗口
 		" Ctrl-w v " 将当前窗口分割成两个垂直的窗口
@@ -36,14 +37,10 @@
 		" Ctrl-w + " 增加视窗的高度
 "" ----------------------------------------------------------------------
 
-
-
-
-
 " 启动pathogen[vim插件管理器]	2016-09-17
 " ----------------------------------------------------------------------
+ set nocompatible              " 关闭vi兼容模式 be iMproved, required
 filetype off
-set nocompatible              " 关闭vi兼容模式 be iMproved, required
 	call pathogen#infect()
 	call pathogen#helptags()
 	set rtp+=~/.vim/Bundle/vundle/
@@ -94,9 +91,6 @@ set nocompatible              " 关闭vi兼容模式 be iMproved, required
     "	Gitv 查看Git详细提交日志(类似gitk)
     "	vim-commentary Vim批量注释工具, 可以注释多行和去除多行注释
     "	indentLine 更加美观的显示缩进对齐线
-"	
-
-			
 		"Bundle 'minibufexpl.vim'
 		Bundle 'taglist.vim'
 		Plugin 'scrooloose/nerdtree'
@@ -161,6 +155,7 @@ set nocompatible              " 关闭vi兼容模式 be iMproved, required
 		Bundle 'EasyGrep'
 
 		Bundle 'L9'
+		Bundle 'a.vim'
 		Bundle 'Mark'
 		Bundle 'matrix.vim'
 		Plugin 'project.vim'
@@ -184,6 +179,11 @@ filetype plugin indent on
 	autocmd FileType java       set omnifunc=javacomplete#Complet
 syntax enable							" 开启简单的语法监测
 syntax on								" 开启自动语法高亮
+" 关于语法syntax
+	" :syntax 列出已经定义的语法项
+	" :syntax clear 清除已定义的语法规则
+	" :syntax case match 大小写敏感，int和Int将视为不同的语法元素
+	" :syntax case ignore 大小写无关，int和Int将视为相同的语法元素，并使用同样的配色方案
 
 " -------------------------------------------------------------------------------------------------
 """ return OS type, eg: windows, or linux, mac, etc...
@@ -413,83 +413,84 @@ let mapleader=','
 	set rtp+=~/.vim/bundle/vundle/
 	"set cursorline					" 下划线方式突出显示当前行
 	"set cursorcolumn				" 突出显示当前列，可用Ctrl+m切换是否显示
-	set ruler                   " 打开状态栏标尺
-	set softtabstop=4           " 使得按退格键时可以一次删掉 4 个空格
-	"set autochdir               " 自动切换当前目录为当前文件所在的目录
-	set ignorecase smartcase    " 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
-	set nowrapscan              " 禁止在搜索到文件两端时重新搜索
-	set incsearch               " 输入搜索内容时就显示搜索结果
+	set ruler						" 打开状态栏标尺
+	":set ruler?　　				" 查看是否设置了ruler，在.vimrc中，使用set命令设制的选项都可以通过这个命令查看
+	set softtabstop=4				" 使得按退格键时可以一次删掉 4 个空格
+	"set autochdir					" 自动切换当前目录为当前文件所在的目录
+	set ignorecase smartcase		" 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
+	set nowrapscan					" 禁止在搜索到文件两端时重新搜索
+	set incsearch					" 输入搜索内容时就显示搜索结果
 	set linespace=0
-	set hlsearch                " 搜索时高亮显示被找到的文本
-	set noerrorbells            " 关闭错误信息响铃
-	set novisualbell            " 关闭使用可视响铃代替呼叫
-	set t_vb=                   " 置空错误铃声的终端代码
-	set matchtime=2             " 短暂跳转到匹配括号的时间
-	set magic                   " 设置魔术
-	set hidden                  " 允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存
-	set guioptions-=T           " 隐藏工具栏
-	set guioptions-=m           " 隐藏菜单栏
-	set smartindent             " 开启新行时使用智能自动缩进
-	set whichwrap+=<,>,h,l			 " 允许backspace和光标键跨越行边界  
+	set hlsearch					" 搜索时高亮显示被找到的文本
+	set noerrorbells				" 关闭错误信息响铃
+	set novisualbell				" 关闭使用可视响铃代替呼叫
+	set t_vb=						" 置空错误铃声的终端代码
+	set matchtime=2					" 短暂跳转到匹配括号的时间
+	set magic						" 设置魔术
+	set hidden						" 允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存
+	set guioptions-=T				" 隐藏工具栏
+	set guioptions-=m				" 隐藏菜单栏
+	set smartindent					" 开启新行时使用智能自动缩进
+	set whichwrap+=<,>,h,l				" 允许backspace和光标键跨越行边界  
 	set softtabstop=4					" 使得按退格键时可以一次删除4个空格
 	set backspace=indent,eol,start		" 不设定的话在插入模式里无法使用退格键 delete和回车符等
-	set backspace=2					 " 使回格键（backspace）正常处理indent, eol, start等
-	set mouse=a						" 设定在任何模式下鼠标都可用
+	set backspace=2						" 使回格键（backspace）正常处理indent, eol, start等
+	set mouse=a							" 设定在任何模式下鼠标都可用
 	set noignorecase					" 默认区分大小写
 	" set nolinebreak					" 在单词中间断行
-	set selection=exclusive			 " 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）  
-	set selectmode=mouse,key		 " 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）  
-	set shellcmdflag=-c				" vimdiff 无法使用问题
-	set showmatch					" 设置匹配模式，高亮显示匹配的括号
-	set showtabline=1				" 显示标签页菜单
+	set selection=exclusive				" 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）  
+	set selectmode=mouse,key			" 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）  
+	set shellcmdflag=-c					" vimdiff 无法使用问题
+	set showmatch						" 设置匹配模式，高亮显示匹配的括号
+	set showtabline=1					" 显示标签页菜单
 	" set softtabstop=4					" 使得按退格键时可以一次删除4个空格
-	set matchtime=5					" 匹配括号高亮的时间（单位是十分之一秒）   
+	set matchtime=5						" 匹配括号高亮的时间（单位是十分之一秒）   
 	set shiftwidth=4					" 缩进所表示的空格数(不同于TAB，是利用>>缩进的大小，自动缩进也看这个值)
 	set scrolloff=3						" 设定光标离窗口上下边界3行时窗口自动滚动
 	"-------------------------------------
 	" The following are commented out as they cause vim to behave a lot
-	set autowrite					" 自动把内容写回文件: 如果文件被修改过，
-	"set backupcopy=no				" 设置备份时的行为为覆盖
+	set autowrite						" 自动把内容写回文件: 如果文件被修改过，
+	"set backupcopy=no					" 设置备份时的行为为覆盖
 	" set nobackup						" 覆盖文件时不备份
-	"set backup						" 覆盖文件时不备份
+	"set backup							" 覆盖文件时不备份
 	"set backupdir=~/tmp/backup/vimrcbak	"指定配置文件的备份路径
 	" 在每个 :next、:rewind、:last、:first、:previous、:stop、:suspend、:tag、:!、:make、CTRL-] 和 CTRL-^命令时进行；
 	" 用 :buffer、CTRL-O、CTRL-I、'{A-Z0-9} 或 `{A-Z0-9} 命令转到别的文件时亦然。
 
-	set linebreak					" 整词换行
-	set whichwrap=b,s,<,>,[,]		" 光标从行首和行末时可以跳到另一行去
-	set number						" set nu [nonu]显示绝对行号
+	set linebreak						" 整词换行
+	set whichwrap=b,s,<,>,[,]			" 光标从行首和行末时可以跳到另一行去
+	set number							" set nu [nonu]显示绝对行号
 	set numberwidth=3
-	set relativenumber				" set rnu [nornu]相对行号，可用Ctrl+n在相对/绝对行号间切换
+	set relativenumber					" set rnu [nornu]相对行号，可用Ctrl+n在相对/绝对行号间切换
 "--命令行设置--
-	set cmdheight=1						" 设定命令行的行数为1
+	set cmdheight=2						" 设定命令行的行数为1
 	set wrap							" 自动换行显示
-	set showcmd						" 在状态栏显示目录所执行的指定，未完成的指令片段也会显示出来
+	set showcmd							" 在状态栏显示目录所执行的指定，未完成的指令片段也会显示出来
 	set showmode						" 命令行显示vim当前模式
 	set hlsearch						" 搜索时高亮显示被找到的文件
-	set shortmess=atI           " 去掉欢迎界面
-	set report=0  					" 通过使用: commands命令，告诉我们文件的哪一行被改变过  
+	set shortmess=atI					" 去掉欢迎界面
+	set report=0						" 通过使用: commands命令，告诉我们文件的哪一行被改变过  
 	" set nohlsearch					" 搜索时不高亮显示被找到的文本
-	"set t_ti= t_te=				" 退出vim后，内容显示在终端屏幕 设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制好处：
+	"set t_ti= t_te=					" 退出vim后，内容显示在终端屏幕 设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制好处：
 	"
 	"#######################################################################################
 	" set expandtab						" 将tab键转换为空格
-	  set history=100						" 设置冒号命令和搜索命令历史列表长度为50
+	  set history=100					" 设置冒号命令和搜索命令历史列表长度为50
 	  set undolevels=5000
 	" set nolinebreak					" 在单词中间断行
-	  set tabstop=4						" TAB键所表示的空格数(这个值只能管tab，不管缩进)
+	  set tabstop=4						" TAB键所表示的空格数(这个值只能管tab显示出来的宽度，不管缩进)
 	"----------------------------------------------------------------------------------------
 	set smartcase						" 如果搜索模式包含大写字符，不使用 'ignorecase' 选项。只有在输入搜索模式并且打开 'ignorecase' 选项时才会使用。
-	set autoindent					" 设置自动对齐(缩进)：即每行的缩进值与上一行相等；使用 noautoindent 取消设置
-	set cindent						" 使用 C/C++ 语言的自动缩进方式
+	set autoindent						" 设置自动对齐(缩进)：即每行的缩进值与上一行相等；使用 noautoindent 取消设置
+	set cindent							" 使用 C/C++ 语言的自动缩进方式
 	set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s     "设置C/C++语言的具体缩进方式
-	set matchtime=5					" 匹配括号高亮的时间（单位是十分之一秒）   
-	set whichwrap=b,s,<,>,[,]		" 光标从行首和行末时可以跳到另一行去
+	set matchtime=5						" 匹配括号高亮的时间（单位是十分之一秒）   
+	set whichwrap=b,s,<,>,[,]			" 光标从行首和行末时可以跳到另一行去
 	""---------------------------------------------------------------------------------------
 	"	" 在处理未保存或只读文件的时候，弹出确认
-	set formatoptions=tcq			" 
-	set formatoptions+=mM			" 使得注释换行时自动加上前导的空格和星号
-    " set formatoptions-=cro   		" 取消注释换行时自动加上前导的空格和星号
+	set formatoptions=tcq				" 
+	set formatoptions+=mM				" 使得注释换行时自动加上前导的空格和星号
+    " set formatoptions-=cro			" 取消注释换行时自动加上前导的空格和星号
 		"formatoptions参数说明
 		"选项 formatoptions 确定了跟文本格式化有关的基本选项，常用的数值有：
 		"	" t：根据 textwidth=72 时自动折行；
@@ -737,6 +738,22 @@ nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
 "--------------------------------------------------------------------------
 " color scheme "配色方案
+"--------------------------------------------------------------------------
+	" 命令:color或:colorscheme后回车查看当前的颜色主题
+	" 多窗口分隔符颜色设置
+	hi VertSplit    term=reverse        cterm=reverse          gui=none             guibg=Grey10      guifg=White 
+	" Tab 标签栏颜色设置
+	highlight TabLine term=underline cterm=bold ctermfg=9 ctermbg=4
+	highlight TabLineSel term=bold cterm=bold ctermbg=Red ctermfg=yellow
+	" 自动补全颜色设置
+	highlight Pmenu ctermbg=darkred
+	highlight PmenuSel ctermbg=red ctermfg=yellow
+	" 函数名样式颜色设置
+	highlight Function cterm=bold,underline ctermbg=red ctermfg=green
+	" 对齐线样式颜色设置
+	let g:indent_guides_start_level = 2
+	let g:indent_guides_guide_size  = 1
+	" 颜色列表
 		" Aliceblue        " Antiquewhite  " Aqua           " Aquamarine     " Azure          " Beige                " Bisque            " Black           " Blanchedalmond  " Blue
 		" Blueviolet       " Brown         " Burlywood      " Cadetblue      " Chartruse      " Chocolate            " Coral             " Cornflowerblue  " Cornsilk        " Crimson
 		" Cyan             " Darkblue      " Darkcyan       " Darkgoldenrod  " Darkgray       " Darkgreen            " Darkkhaki         " Darkmagenta     " Darkolivegreen  " Darkorange
@@ -800,6 +817,7 @@ nnoremap <silent> <CR> :nohlsearch<CR><CR>
 	"	end
 	"endfunction
 
+" -------------------------------------------------------------------------------------------------
 " for project
 "--------------------------------------------------------------------------
 nmap <silent> <Leader>P <Plug>ToggleProject
@@ -853,6 +871,7 @@ nmap <silent> <Leader>P <Plug>ToggleProject
 	"	\I显示文件或文件夹的决对路径和参数
 	"	\1 - \9，\f1-\f9，\F1-\F9执行指定命令，\0查询1-9命令，\f0查询f1-f9，F1-F9命令
 
+" -------------------------------------------------------------------------------------------------
 " for Minibufexplorer
 " -------------------------------------------------------------------------------------------------
 	let g:miniBufExplMapWindowNavVim    = 1
@@ -899,6 +918,7 @@ nmap <silent> <Leader>P <Plug>ToggleProject
 	" 
 " -------------------------------------------------------------------------------------------------
 "
+" -------------------------------------------------------------------------------------------------
 " for Tagbar
 " -------------------------------------------------------------------------------------------------
 	nmap tb :Tagbar<cr>
@@ -915,6 +935,7 @@ nmap <silent> <Leader>P <Plug>ToggleProject
 		return 1
 	endfunction
 
+" -------------------------------------------------------------------------------------------------
 " for nerd_tree
 " -------------------------------------------------------------------------------------------------
 	let NERDChristmasTree           = 1							" 让Tree把自己给装饰得多姿多彩漂亮点
@@ -951,7 +972,7 @@ nmap <silent> <Leader>P <Plug>ToggleProject
     \ }	
 
 	"autocmd vimenter * NERDTree             			" 自动开启NERDTree窗口
-	nnoremap nt :NERDTreeToggle<CR>:set rnu<cr>			" 设置nt调出窗口
+	nnoremap <silent> nt :NERDTreeToggle<CR>:set rnu<cr>			" 设置nt调出窗口
 	autocmd bufenter * if (winnr("$") -- 1 && exists("b:NERDTreeType") &&b:NERDTreeType -- "primary") | q | endif " 别无其它时,一起关闭
 	"NERDTree快捷键
 		""-----------------------------------------------------------------
@@ -963,7 +984,57 @@ nmap <silent> <Leader>P <Plug>ToggleProject
 		" r 递归刷新当前目录             R 递归刷新当前根目录
 		" ? 帮助						 q 关闭
 		"-----------------------------------------------------------------
+	"切换工作台和目录
 
+		" ctrl + w + h    光标 focus 左侧树形目录
+		" ctrl + w + l    光标 focus 右侧文件显示窗口
+		" ctrl + w + w    光标自动在左右侧窗口切换
+		" ctrl + w + r    移动当前窗口的布局位置
+		" o       在已有窗口中打开文件、目录或书签，并跳到该窗口
+		" go      在已有窗口 中打开文件、目录或书签，但不跳到该窗口
+		" t       在新 Tab 中打开选中文件/书签，并跳到新 Tab
+		" T       在新 Tab 中打开选中文件/书签，但不跳到新 Tab
+		" i       split 一个新窗口打开选中文件，并跳到该窗口
+		" gi      split 一个新窗口打开选中文件，但不跳到该窗口
+		" s       vsplit 一个新窗口打开选中文件，并跳到该窗口
+		" gs      vsplit 一个新 窗口打开选中文件，但不跳到该窗口
+		" !       执行当前文件
+		" O       递归打开选中 结点下的所有目录
+		" x       合拢选中结点的父目录
+		" X       递归 合拢选中结点下的所有目录
+		" e       Edit the current dif
+		" 双击    相当于 NERDTree-o
+		" 中键    对文件相当于 NERDTree-i，对目录相当于 NERDTree-e
+		" D       删除当前书签
+		" P       跳到根结点
+		" p       跳到父结点
+		" K       跳到当前目录下同级的第一个结点
+		" J       跳到当前目录下同级的最后一个结点
+		" k       跳到当前目录下同级的前一个结点
+		" j       跳到当前目录下同级的后一个结点
+		" C       将选中目录或选中文件的父目录设为根结点
+		" u       将当前根结点的父目录设为根目录，并变成合拢原根结点
+		" U       将当前根结点的父目录设为根目录，但保持展开原根结点
+		" r       递归刷新选中目录
+		" R       递归刷新根结点
+		" m       显示文件系统菜单
+		" cd      将 CWD 设为选中目录
+		" I       切换是否显示隐藏文件
+		" f       切换是否使用文件过滤器
+		" F       切换是否显示文件
+		" B       切换是否显示书签
+		" q       关闭 NerdTree 窗口
+		" ?       切换是否显示 Quick Help
+	" 切换标签页
+		" 
+		" :tabnew [++opt选项] ［＋cmd］ 文件      建立对指定文件新的tab
+		" :tabc   关闭当前的 tab
+		" :tabo   关闭所有其他的 tab
+		" :tabs   查看所有打开的 tab
+		" :tabp   前一个 tab
+		" :tabn   后一个 tab
+
+" -------------------------------------------------------------------------------------------------
 " for TagList
 " -------------------------------------------------------------------------------------------------
 	if MySys() -- "windows"                " 设定windows系统中ctags程序的位置
@@ -978,16 +1049,22 @@ nmap <silent> <Leader>P <Plug>ToggleProject
 	" let Tlist_Use_SingleClick      = 1         			" 单击tag就跳转
 	let Tlist_Use_Left_Window        = 1          			" 在左侧窗口显示taglist窗口
 	let Tlist_Auto_Open              = 0               		" 启动VIM自动打开taglist
-	let g:Tlist_GainFocus_On_ToggleOpen = 1                 	" 0:  打开Taglist时光标停留在原窗口  
+	let g:Tlist_GainFocus_On_ToggleOpen = 1                 " 0:  打开Taglist时光标停留在原窗口  
 	let Tlist_Close_On_Select      	 = 0         			" 选择tag后自动关闭taglist
-	let Tlist_File_Fold_Auto_Close = 1				" 多文件时只显示当前文件的tag，其它的tag折叠" 非当前文件，函数列表折叠隐藏
-	let Tlist_WinHeight              = 200				" taglist窗口高度
+	let Tlist_File_Fold_Auto_Close = 1					" 多文件时只显示当前文件的tag，其它的tag折叠" 非当前文件，函数列表折叠隐藏
+	let Tlist_WinHeight              = 120				" taglist窗口高度
 	let Tlist_WinWidth               = 30				" taglist窗口宽度
+	let Tlist_Max_Submenu_Items		 = 5				" 控制菜单条目数
+	let Tlist_Max_Tag_Length		 = 8				" 所显示tag名字的长度
+	let Tlist_Enable_Fold_Column	 = 1
+	let Tlist_Compact_Format		 = 1				" 减少标签列表窗口中的空白行 
 	" let Tlist_Use_Horiz_Window     = 1				" 设置taglist窗口横向显示
 	let Tlist_Process_File_Always    = 1 				" 实时更新tags
 	nnoremap tl :TlistOpen<CR>					
 															" 设置tl调出taglist
+															" map <F3> :TlistToggle <CR>
 
+" -------------------------------------------------------------------------------------------------
 " for ctags 
 " -------------------------------------------------------------------------------------------------
 	"方式之一:
@@ -1023,6 +1100,7 @@ nmap <silent> <Leader>P <Plug>ToggleProject
 		""		<F1>          显示帮助
 
 """"""""""""""""""""""""""""
+" -------------------------------------------------------------------------------------------------
 " for MRU
 " -------------------------------------------------------------------------------------------------
 	""""""""""""""""""""""""""""
@@ -1034,6 +1112,9 @@ nmap <silent> <Leader>P <Plug>ToggleProject
 	"映射F2打开和关闭MRU窗口，bufloaded是判断缓冲是否加载
 	map <expr> <F2> bufloaded("__MRU_Files__")?"q":":MRU\<cr>" 
 	"
+	"
+	"
+" -------------------------------------------------------------------------------------------------
 " lookupfile.vim 插件设置
 " -------------------------------------------------------------------------------------------------
 	let g:LookupFile_MinPatLength           = 2 "最少输入2个字符才开始查找
@@ -1052,6 +1133,7 @@ nmap <silent> <Leader>P <Plug>ToggleProject
  "SearchComplete : Tab completion of words inside of a search ('/')
 
 """"""""""""""""""""""""""""
+" -------------------------------------------------------------------------------------------------
 " for Omincppcomplete 自动补全, 借助L9库(vim 函数库)
 " -------------------------------------------------------------------------------------------------
 		" 使用这个插件时, 需要用
@@ -1064,8 +1146,8 @@ nmap <silent> <Leader>P <Plug>ToggleProject
 	let OmniCpp_NamespaceSearch     = 1
 	let OmniCpp_GlobalScopeSearch   = 1
 	let OmniCpp_ShowAccess          = 1
-	let OmniCpp_ShowPrototypeInAbbr = 1 		" 显示函数参数列表
-	let OmniCpp_MayCompleteDot      = 1   			" 输入 .  后自动补全
+	let OmniCpp_ShowPrototypeInAbbr = 1				" 显示函数参数列表
+	let OmniCpp_MayCompleteDot      = 1 			" 输入 .  后自动补全
 	let OmniCpp_MayCompleteArrow    = 1 			" 输入 -> 后自动补全
 	let OmniCpp_MayCompleteScope    = 1 			" 输入 :: 后自动补全
 	let OmniCpp_DefaultNamespaces   = ["std"]
@@ -1079,6 +1161,7 @@ if v:version >= 700
 	set completeopt=menu,longest,preview
 endif
 
+" -------------------------------------------------------------------------------------------------
 " for grep.vim
 " -------------------------------------------------------------------------------------------------
 nnoremap <silent><F3> :Rgrep<CR>
@@ -1133,30 +1216,45 @@ nnoremap <silent><F3> :Rgrep<CR>
 	    nmap <leader>sd :cs find d <C-R>=expand("<cword>")<CR><CR>:copen<CR>
 	endif
 
+" -------------------------------------------------------------------------------------------------
 " for syntastic  " 多语言语法检查
 " -------------------------------------------------------------------------------------------------
-		"""Bundle 'scrooloose/syntastic'
-		set statusline+=%#warningmsg#
-		set statusline+=%{SyntasticStatuslineFlag()}
-		set statusline+=%*
-		let g:syntastic_always_populate_loc_list = 1
-		let g:syntastic_auto_loc_list = 1
-		let g:syntastic_check_on_open = 1
-		let g:syntastic_check_on_wq = 0
-		let g:syntastic_error_symbol = '✗'      "set error or warning signs
-		let g:syntastic_warning_symbol = '⚠'
-		let g:syntastic_enable_highlighting = 0
-		let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes,速度比pylint快
-		let g:syntastic_javascript_checkers = ['jsl', 'jshint']
-		let g:syntastic_html_checkers=['tidy', 'jshint']
-		let g:syntastic_cpp_include_dirs = ['/usr/include/']
-		let g:syntastic_cpp_remove_include_errors = 1
-		let g:syntastic_cpp_check_header = 1
-		let g:syntastic_cpp_compiler = 'clang++'
-		let g:syntastic_cpp_compiler_options = '-std=C++11 -stdlib=libstdc++'
-		let g:syntastic_enable_balloons = 1 "whether to show balloons
-		highlight SyntasticErrorSign guifg=white guibg=black
+	"""Bundle 'scrooloose/syntastic'
+	set statusline+=%#warningmsg#
+	set statusline+=%{SyntasticStatuslineFlag()}
+	set statusline+=%*
+	let g:syntastic_always_populate_loc_list = 1
+	let g:syntastic_auto_loc_list = 1
+	let g:syntastic_check_on_open = 1
+	let g:syntastic_check_on_wq = 0
+	let g:syntastic_error_symbol = '✗'      "set error or warning signs
+	let g:syntastic_warning_symbol = '⚠'
+	let g:syntastic_enable_highlighting = 0
+	let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes,速度比pylint快
+	let g:syntastic_javascript_checkers = ['jsl', 'jshint']
+	let g:syntastic_html_checkers=['tidy', 'jshint']
+	let g:syntastic_cpp_include_dirs = ['/usr/include/']
+	let g:syntastic_cpp_remove_include_errors = 1
+	let g:syntastic_cpp_check_header = 1
+	let g:syntastic_cpp_compiler = 'clang++'
+	let g:syntastic_cpp_compiler_options = '-std=C++11 -stdlib=libstdc++'
+	let g:syntastic_enable_balloons = 1 "whether to show balloons
+	highlight SyntasticErrorSign guifg=white guibg=black
 
+	"  :nmap <F5> :cl<CR>                " 此命令用于查看所有的编译错误.
+	"  :imap <F5> <ESC><F5>
+	"
+	"  :nmap <F6> :cc<CR>                " 此命令用于查看当前的编译错误.
+	"  :imap <F6> <ESC><F6>
+	"
+	"  :nmap <F7> :cn<CR>                " 此命令用于跳到下一个出错位置.
+	"  :imap <F7> <ESC><F7>
+	"
+	"  :nmap <F8> :cp<CR>                " 此命令用于跳到上一个出错位置.
+	"  :imap <F8> <ESC><F8>
+
+
+" -------------------------------------------------------------------------------------------------
 " for YcmCompleterMe " 代码自动补全
 " -------------------------------------------------------------------------------------------------
 		"迄今为止用到的最好的自动VIM自动补全插件
@@ -1199,6 +1297,7 @@ nnoremap <silent><F3> :Rgrep<CR>
 			  \ 'gitcommit' : 1,
 			  \}		
 
+" -------------------------------------------------------------------------------------------------
 " for gundo
 " -------------------------------------------------------------------------------------------------
 	" edit history, 可以查看回到某个历史状态
@@ -1206,34 +1305,44 @@ nnoremap <silent><F3> :Rgrep<CR>
 	nnoremap <leader>h :GundoToggle<CR>
 	"
  
+" -------------------------------------------------------------------------------------------------
 " for indentLine  ""这个插件安装成功后就会显示缩进对齐线
 " -------------------------------------------------------------------------------------------------
 map <leader>il :IndentLinesToggle<CR>
 "--------------------------------------------------------------------------
-" 特殊符号的显示
+" 特殊符号的显示与输入
 "--------------------------------------------------------------------------
-	" 去折叠行横线'-'
+"" 特殊字符的输入
+	" :h digraphs-use  " 查看帮助
+	" :dig[raphs]     " 显示特殊字符列表
+	" 在--INSERT--下<CTRL> + K ，然后输入两个字母来完成对特殊字母的输入。
+	" 4! →  ┊
+	" tk →  ث
+" 去折叠行横线'-'
 	"se fcs=vert:\ 
 	" 换折叠行符号为下横线'_'
 	se fcs=vert:\|,fold:_
-	" 对齐中的TAB 与 SPACE;
-	" 设置将Tab显示为|(竖线)，将行尾的空格显示为-(减号)
-	" 显示tab和空格
-	""set list " 设置tab和空格样式
 	"在被分割的窗口间显示空白，便于阅读
-	set fillchars=vert:\| ,stl: ,stlnc:  
-	"set list lcs=tab:\¦ ,nbsp:% ,trail:= " 注意\后面有空格，设置完成后，按tab缩进即可。
+	set fillchars=vert:\| ,stl:\ ,stlnc:\ 
+	" --------------------------------------
+" 对齐中的TAB 与 SPACE;
+		" 设置将Tab显示为|(竖线)，将行尾的空格显示为-(减号)
+	" 显示tab和空格
+	set list " 设置tab和空格样式
+	" 注意\后面有空格，设置完成后，按tab缩进即可。
+	set lcs=tab:\¦\ ,nbsp:%,trail:-
 	highlight LeaderTab ctermbg=black ctermfg=blue guifg=#666666    " 匹配行首tab
 	match LeaderTab /^\t/
-	""set list!  """显示/隐藏 TAB键以及空格等不可见字符
+	" --------------------------------------
+	"set list!  """显示/隐藏 TAB键以及空格等不可见字符
 	"set list		""显示/隐藏 TAB键以及空格等不可见字符
 	"set listchars=tab:>-,eol:$		""将TAB设为>---可见字符
-	"	有关的帮助入口：
-
+" 有关的帮助入口：
 	"	:tab h 'fcs'
 	"	:tab h 'foldtext'
 "
 
+" -------------------------------------------------------------------------------------------------
 " for Ultisnips
 " -------------------------------------------------------------------------------------------------
 	" 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
@@ -1269,6 +1378,7 @@ map <leader>il :IndentLinesToggle<CR>
 		au BufEnter,BufRead * exec "inoremap <silent> " . g:UltiSnipsJumpBackwordTrigger . " <C-R>=g:KInYCM()<cr>"
 		let g:UltiSnipsJumpBackwordTrigger = "<c-k>"
 
+" -------------------------------------------------------------------------------------------------
 " for Easy motion 
 " -------------------------------------------------------------------------------------------------
 	let g:EasyMotion_smartcase = 1			""智能区分大小写功能
@@ -1292,6 +1402,7 @@ map <leader>il :IndentLinesToggle<CR>
 	map  <Leader>w <Plug>(easymotion-bd-w)
 	nmap <Leader>w <Plug>(easymotion-overwin-w)
 
+" -------------------------------------------------------------------------------------------------
 " for Ctrlp
 " -------------------------------------------------------------------------------------------------
 " 文件搜索
@@ -1321,6 +1432,7 @@ map <leader>il :IndentLinesToggle<CR>
 	let g:ctrlp_funky_syntax_highlight = 1
 	let g:ctrlp_extensions = ['funky']
 
+" -------------------------------------------------------------------------------------------------
 " for vim maps
 " -------------------------------------------------------------------------------------------------
 "vim的map:
@@ -1449,8 +1561,250 @@ map <leader>il :IndentLinesToggle<CR>
 "在打开编辑器时，如果不需要补全功能，可以按shift+tab
 let g:SuperTabMappingForward = "<tab>"
 let g:SuperTabMappingBackward= "s-tab"
+
 " -------------------------------------------------------------------------------------------------
-" 删除替换
+"  C，C++ 按F9编译运行
+" -------------------------------------------------------------------------------------------------
+nnoremap <silent> <F9> :wq<CR> :! gcc -g  -Wall -o <c-r>=expand("%:p:r")<cr>  <c-r>=expand("%:p")<cr>  <cr>
+" -------------------------------------------------------------------------------------------------
+" 添加文件说明信息
+" -------------------------------------------------------------------------------------------------
+	nnoremap <silent> <C-S-2> ggi/***
+		\*******************************************************************************
+		\<CR>*<CR>*   FileName    :   
+		\<CR>*<CR>*   Author      :  
+		\<CR>*<CR>*   Created     : 
+		\<CR>*<CR>*   Description :
+		\<CR>*<CR>*
+		\*******************************************************************************/
+		\<CR><CR>
+
+	inoremap <silent> <C-S-1> <ESC>ggi/***
+		\*******************************************************************************
+		\<CR>*<CR>*   FileName    :    
+		\<CR>*<CR>*   Author      :   
+		\<CR>*<CR>*   Created     :  
+		\<CR>*<CR>*   Description :
+		\<CR>*<CR>*
+		\*******************************************************************************/
+		\<CR><CR> 
+" -------------------------------------------------------------------------------------------------
+" 添加自定义代码段.
+" -------------------------------------------------------------------------------------------------
+" [C] main 函数代码块.
+	nnoremap ,ma i#include <stdio.h><CR><CR>int main(int argc, char *argv[])<CR>{<CR>return 0;<ESC>v=o}<ESC>v=kO
+" [C] switch-case代码块
+" -------------------------------------------------------------------------------------------------
+" 添加函数说明信息
+" -------------------------------------------------------------------------------------------------
+nnoremap <silent> <F4> i<CR>/***
+	\*******************************************************************************
+	\<CR>*<CR>*   Function    :    
+	\<CR>*<CR>*   Input       :    
+	\<CR>*<CR>*   Output      :    
+	\<CR>*<CR>*   Return      :    
+	\<CR>*<CR>*   Description :
+	\<CR>*<CR>*   Author      : 
+	\<CR>*<CR>*
+	\*******************************************************************************/
+	\<CR>
+
+inoremap <silent> <F4> <CR>/***
+	\*******************************************************************************
+	\<CR>*<CR>*   Function    :    
+	\<CR>*<CR>*   Input       :    
+	\<CR>*<CR>*   Output      :    
+	\<CR>*<CR>*   Return      :    
+	\<CR>*<CR>*   Description :
+	\<CR>*<CR>*   Author      : 
+	\<CR>*<CR>*
+	\*******************************************************************************/
+	\<CR>
+
+" -------------------------------------------------------------------------------------------------
+"" 添加自定义代码块注释，以区别是自己添加的代码
+" -------------------------------------------------------------------------------------------------
+	"nnoremap <silent> <C-F 5> O
+    "			\/* madao Start  <C-R>=GetDateTime()<ESC> */<ESC>o
+	"			\/* madao End <C-R>=GetDateTime()<ESC> */<ESC>O
+	"
+	"inoremap <silent> <C-F5> <ESC>O
+	"			\/* madao Start  <C-R>=GetDateTime()<ESC> */<ESC>o
+	"			\/* madao End <C-R>=GetDateTime()<ESC> */<ESC>O
+	"
+	"vnoremap <silent> <F5> dO
+	"			\#if 0    // madao Comment Start <C-R>=GetDateTime()<ESC><ESC>o
+	"			\#endif   // madao Comment End   <C-R>=GetDateTime()<ESC><ESC>O<CR><ESC>p
+	"
+	"nnoremap <silent> <F5> O
+	"			\#if 0    // madao Comment Start <C-R>=GetDateTime()<ESC><ESC>o
+	"			\#endif   // madao Comment End   <C-R>=GetDateTime()<ESC><ESC>O
+	"
+	"inoremap <silent> <F5> <ESC>O
+	"			\#if 0    // madao Comment Start <C-R>=GetDateTime()<ESC><ESC>o
+	"		 	\#endif   // madao Comment End   <C-R>=GetDateTime()<ESC><ESC>O
+	"
+	"
+" -------------------------------------------------------------------------------------------------
+""Python 注释
+" -------------------------------------------------------------------------------------------------
+	" function InsertPythonComment()
+	"     exe 'normal'.1.'G'
+	"     let line = getline('.')
+	"     if line =~ '^#!.*$' || line =~ '^#.*coding:.*$'
+	"         return
+	"     endif
+	"     normal O
+	"     call setline('.', '#!/usr/bin/env python')
+	"     normal o
+	"     call setline('.', '# -*- coding:utf-8 -*-')
+	"     normal o ...
+" -------------------------------------------------------------------------------------------------
+" 括号自动补全之一: (,",',{,［
+	nnoremap  <silent>  { i{}<ESC>i
+	inoremap <silent> { {}<ESC>i
+	inoremap { {<CR>}<ESC>kA<CR>
+ 
+	nnoremap <silent> [ i[]<ESC>i
+	inoremap <silent> [ []<ESC>i
+
+	nnoremap <silent> ( i()<ESC>i
+	inoremap <silent> ( ()<ESC>i
+
+	""noremap  <silent> " i""<ESC>i
+	""inoremap <silent> " ""<ESC>i
+
+	""noremap  <silent> ' i''<ESC>i
+	""inoremap <silent> ' ''<ESC>i
+
+	"noremap  <silent> < i<><ESC>i
+	"inoremap <silent> < <><ESC>i
+" 括号自动补全之二:
+	"inoremap  { {}<ESC>i 
+	"inoremap { {<CR>}<ESC>kA<CR>
+	"inoremap [ []<ESC>i
+	"inoremap ( ()<ESC>i
+	"inoremap " ""<ESC>i
+	"inoremap ' ''<ESC>i
+	""inoremap < <><ESC>i
+	"
+" 代码自动补全:
+	"整行补全                        CTRL-X CTRL-L
+	"根据当前文件里关键字补全        CTRL-X CTRL-N
+	"根据字典补全                    CTRL-X CTRL-K
+	"根据同义词字典补全              CTRL-X CTRL-T
+	"根据头文件内关键字补全          CTRL-X CTRL-I
+	"根据标签补全                    CTRL-X CTRL-]
+	"补全文件名                      CTRL-X CTRL-F
+	"补全宏定义                      CTRL-X CTRL-D
+	"补全vim命令                     CTRL-X CTRL-V
+	"用户自定义补全方式              CTRL-X CTRL-U
+	"拼写建议                        CTRL-X CTRL-S
+" -------------------------------------------------------------------------------------------------
+"vim 自带补全
+" -------------------------------------------------------------------------------------------------
+	"  c-p(c-n)        在编辑模式中, 输入几个字符后再输入此命令则 vi 开始向上(下)搜
+	"                  索开头与其匹配的单词并补齐, 不断输入此命令则循环查找. 此命令
+	"                  会在所有在这个 vim 程序中打开的文件中进行匹配.
+	"
+	"  c-x-l           在编辑模式中, 此命令快速补齐整行内容, 但是仅在本窗口中出现的
+	"                  文档中进行匹配.
+	"
+	"  c-x-f           在编辑模式中, 这个命令表示补齐文件名. 如输入:
+	"                  /usr/local/tom 后再输入此命令则它会自动匹配出:
+	"                  /usr/local/tomcat/
+	"
+	"  abbr            即缩写. 这是一个宏操作, 可以在编辑模式中用一个缩写代替另一个
+	"                  字符串. 比如编写java文件的常常输入 System.out.println, 这很
+	"                  是麻烦, 所以应该用缩写来减少敲字. 可以这么做:
+	"                  :abbr sprt System.out.println
+	"                  以后在输入sprt后再输入其他非字母符号, 它就会自动扩展为System.
+	"                  out.println
+	""
+	"
+" -------------------------------------------------------------------------------------------------
+"# 文档中的标记和移动
+	" .          " 最近编辑的位置
+	" 0-9        " 最近使用的文件
+	" ∧         " 最近插入的位置
+	" '          " 上一次跳转前的位置
+	" `          " 上一次退出文件时的位置
+	" [          " 上一次修改的开始处
+	" ]          " 上一次修改的结尾处
+	"# 命令小结
+	" m          " 创建标记
+	" '          " 移动到标记的文本行首
+	" `          " 移动到标记的光标位置
+	" :marks     " 列示所有标记
+	" :delmarks  " 删除指定标记
+	" :delmarks! " 删除所有标记
+	" \'.              : 跳到最后修改的那一行 (超级有用)(ft,怎么又是这个评价)
+	" `.               : 不仅跳到最后修改的那一行，还要定位到修改点
+	" <C-O>            : 依次沿着你的跳转记录向回跳 (从最近的一次开始)
+	" <C-I>            : 依次沿着你的跳转记录向前跳
+	" :ju(mps)         : 列出你跳转的足迹
+	" :help jump-motions
+	" :history         : 列出历史命令记录
+	" :his c           : 命令行命令历史
+	" :his s           : 搜索命令历史
+	" q/               : 搜索命令历史的窗口
+	" q:               : 命令行命令历史的窗口
+	" :<C-F>           : 历史命令记录的窗口
+	"
+" -------------------------------------------------------------------------------------------------
+"  1、简单方向移动
+	"       ^:移动光标到行首；  
+	"       $:移动光标到行尾；  
+	"       ctrl-b:类似于键盘上的"PgUp"(b为backword)  
+	"       ctrl-f：类似于键盘上的"PgDn"(f为forword)  
+	"       ^:移动光标到行首；
+	"       $:移动光标到行尾；
+	"       ctrl-b:类似于键盘上的"PgUp"(b为backword)
+	"       ctrl-f：类似于键盘上的"PgDn"(f为forword)
+"      行操作：
+	"       G：移动到末行；  
+	"       1G：移动到首行；  
+	"       50G：移动到50行；  
+	"        H：移动到当前窗口的首行；  
+	"        M：移动到当前窗口的中间位置；  
+	"        L：移动光标到当前窗口的最后一行；  
+	"        G：移动到末行；
+	"        1G：移动到首行；
+	"        50G：移动到50行；
+	"         H：移动到当前窗口的首行；
+	"         M：移动到当前窗口的中间位置；
+	"         L：移动光标到当前窗口的最后一行；
+"  2、单词、句、段落操作
+	"  w:光标移动到下一个单词的词首；注：对于中文，连续的多个汉字作为一个word。  
+	"  2w:重复执行w操作2次；  
+	"  e:光标移动到下一个单词的词尾；  
+	"  5e:重复执行e操作5次；  
+	"  b：向前移动光标，移动到前一个单词的词首；  
+	"  w:光标移动到下一个单词的词首；注：对于中文，连续的多个汉字作为一个word。
+	"  2w:重复执行w操作2次；
+	"  e:光标移动到下一个单词的词尾；
+	"  5e:重复执行e操作5次；
+	"  b：向前移动光标，移动到前一个单词的词首；
+	"  如果想了解更多，可以在vim Normal模式下输入 ：help word-motions
+	"  
+"  句字(sentences)直接移动操作：
+	"  
+	"  ):光标移动到下一句；
+	"  (:光标移动到上一句；
+	"  3):光标移动到向下3句
+"  段落（paragraphs）直接移动操作：
+	"  {:向上移动一个段落；
+	"  }:向下移动一个段落
+	"  3}:向下移动3个段落
+	"  更多操作在vim Normal模式下输入 :help cursor-motions
+"  标记（mark）：
+" -------------------------------------------------------------------------------------------------
+"# 选中和删除
+" -------------------------------------------------------------------------------------------------
+	" df=, yf=, cf=, vf= 从当前字符开始删除(复制,改变,选中),直到遇到=之后
+	" dt”, yt”, ct”, vt” 从当前字符开始删除(复制,改变,选中),直到遇到”之前
+" -------------------------------------------------------------------------------------------------
+"# 删除与替换
 " -------------------------------------------------------------------------------------------------
 	" 语法为 :[addr]s/源字符串/目的字符串/[option]
 		" 
@@ -1558,179 +1912,9 @@ let g:SuperTabMappingBackward= "s-tab"
 		" :%s/\s*$//ge，将行尾多余空格删除。
 		" 
 		" 设置fileformat属性，:set ff=dos (\r\n win换行) :set ff=unix (\n unix/linux换行) :set ff=mac (\r Mac换行)
-
-" -------------------------------------------------------------------------------------------------
-"  C，C++ 按F9编译运行
-" -------------------------------------------------------------------------------------------------
-nnoremap <silent> <F9> :wq<CR> :! gcc -g  -Wall -o <c-r>=expand("%:p:r")<cr>  <c-r>=expand("%:p")<cr>  <cr>
-" -------------------------------------------------------------------------------------------------
-" 添加文件说明信息
-" -------------------------------------------------------------------------------------------------
-	nnoremap <silent> <C-S-2> ggi/***
-		\*******************************************************************************
-		\<CR>*<CR>*   FileName    :   
-		\<CR>*<CR>*   Author      :  
-		\<CR>*<CR>*   Created     : 
-		\<CR>*<CR>*   Description :
-		\<CR>*<CR>*
-		\*******************************************************************************/
-		\<CR><CR>
-
-	inoremap <silent> <C-S-1> <ESC>ggi/***
-		\*******************************************************************************
-		\<CR>*<CR>*   FileName    :    
-		\<CR>*<CR>*   Author      :   
-		\<CR>*<CR>*   Created     :  
-		\<CR>*<CR>*   Description :
-		\<CR>*<CR>*
-		\*******************************************************************************/
-		\<CR><CR> 
-" -------------------------------------------------------------------------------------------------
-" 添加自定义代码段.
-" -------------------------------------------------------------------------------------------------
-" [C] main 函数代码块.
-	nnoremap ,ma i#include <stdio.h><CR><CR>int main(int argc, char *argv[])<CR>{<CR>return 0;<ESC>v=o}<ESC>v=kO
-" [C] switch-case代码块
-" -------------------------------------------------------------------------------------------------
-" 添加函数说明信息
-" -------------------------------------------------------------------------------------------------
-nnoremap <silent> <F4> i<CR>/***
-	\*******************************************************************************
-	\<CR>*<CR>*   Function    :    
-	\<CR>*<CR>*   Input       :    
-	\<CR>*<CR>*   Output      :    
-	\<CR>*<CR>*   Return      :    
-	\<CR>*<CR>*   Description :
-	\<CR>*<CR>*   Author      : 
-	\<CR>*<CR>*
-	\*******************************************************************************/
-	\<CR> 
-
-inoremap <silent> <F4> <CR>/***
-	\*******************************************************************************
-	\<CR>*<CR>*   Function    :    
-	\<CR>*<CR>*   Input       :    
-	\<CR>*<CR>*   Output      :    
-	\<CR>*<CR>*   Return      :    
-	\<CR>*<CR>*   Description :
-	\<CR>*<CR>*   Author      : 
-	\<CR>*<CR>*
-	\*******************************************************************************/
-	\<CR>
-
-"" 添加自定义代码块注释，以区别是自己添加的代码
-	"nnoremap <silent> <C-F 5> O
-    "			\/* madao Start  <C-R>=GetDateTime()<ESC> */<ESC>o
-	"			\/* madao End <C-R>=GetDateTime()<ESC> */<ESC>O
-	"
-	"inoremap <silent> <C-F5> <ESC>O
-	"			\/* madao Start  <C-R>=GetDateTime()<ESC> */<ESC>o
-	"			\/* madao End <C-R>=GetDateTime()<ESC> */<ESC>O
-	"
-	"vnoremap <silent> <F5> dO
-	"			\#if 0    // madao Comment Start <C-R>=GetDateTime()<ESC><ESC>o
-	"			\#endif   // madao Comment End   <C-R>=GetDateTime()<ESC><ESC>O<CR><ESC>p
-	"
-	"nnoremap <silent> <F5> O
-	"			\#if 0    // madao Comment Start <C-R>=GetDateTime()<ESC><ESC>o
-	"			\#endif   // madao Comment End   <C-R>=GetDateTime()<ESC><ESC>O
-	"
-	"inoremap <silent> <F5> <ESC>O
-	"			\#if 0    // madao Comment Start <C-R>=GetDateTime()<ESC><ESC>o
-	"		 	\#endif   // madao Comment End   <C-R>=GetDateTime()<ESC><ESC>O
-	"
-	"
-""Python 注释
-	" function InsertPythonComment()
-	"     exe 'normal'.1.'G'
-	"     let line = getline('.')
-	"     if line =~ '^#!.*$' || line =~ '^#.*coding:.*$'
-	"         return
-	"     endif
-	"     normal O
-	"     call setline('.', '#!/usr/bin/env python')
-	"     normal o
-	"     call setline('.', '# -*- coding:utf-8 -*-')
-	"     normal o ...
-" -------------------------------------------------------------------------------------------------
-" 括号自动补全之一: (,",',{,［
-	nnoremap  <silent>  { i{}<ESC>i
-	inoremap <silent> { {}<ESC>i
-	inoremap { {<CR>}<ESC>kA<CR>
- 
-	nnoremap <silent> [ i[]<ESC>i
-	inoremap <silent> [ []<ESC>i
-
-	nnoremap <silent> ( i()<ESC>i
-	inoremap <silent> ( ()<ESC>i
-
-	""noremap  <silent> " i""<ESC>i
-	""inoremap <silent> " ""<ESC>i
-
-	""noremap  <silent> ' i''<ESC>i
-	""inoremap <silent> ' ''<ESC>i
-
-	"noremap  <silent> < i<><ESC>i
-	"inoremap <silent> < <><ESC>i
-" 括号自动补全之二:
-	"inoremap  { {}<ESC>i 
-	"inoremap { {<CR>}<ESC>kA<CR>
-	"inoremap [ []<ESC>i
-	"inoremap ( ()<ESC>i
-	"inoremap " ""<ESC>i
-	"inoremap ' ''<ESC>i
-	""inoremap < <><ESC>i
-	"
-" 代码自动补全:
-	"整行补全                        CTRL-X CTRL-L
-	"根据当前文件里关键字补全        CTRL-X CTRL-N
-	"根据字典补全                    CTRL-X CTRL-K
-	"根据同义词字典补全              CTRL-X CTRL-T
-	"根据头文件内关键字补全          CTRL-X CTRL-I
-	"根据标签补全                    CTRL-X CTRL-]
-	"补全文件名                      CTRL-X CTRL-F
-	"补全宏定义                      CTRL-X CTRL-D
-	"补全vim命令                     CTRL-X CTRL-V
-	"用户自定义补全方式              CTRL-X CTRL-U
-	"拼写建议                        CTRL-X CTRL-S
-	"
-	"
-" -------------------------------------------------------------------------------------------------
-"# 标记和移动
-	" .          " 最近编辑的位置
-	" 0-9        " 最近使用的文件
-	" ∧         " 最近插入的位置
-	" '          " 上一次跳转前的位置
-	" `          " 上一次退出文件时的位置
-	" [          " 上一次修改的开始处
-	" ]          " 上一次修改的结尾处
-	"# 命令小结
-	" m          " 创建标记
-	" '          " 移动到标记的文本行首
-	" `          " 移动到标记的光标位置
-	" :marks     " 列示所有标记
-	" :delmarks  " 删除指定标记
-	" :delmarks! " 删除所有标记
-	" \'.              : 跳到最后修改的那一行 (超级有用)(ft,怎么又是这个评价)
-	" `.               : 不仅跳到最后修改的那一行，还要定位到修改点
-	" <C-O>            : 依次沿着你的跳转记录向回跳 (从最近的一次开始)
-	" <C-I>            : 依次沿着你的跳转记录向前跳
-	" :ju(mps)         : 列出你跳转的足迹
-	" :help jump-motions
-	" :history         : 列出历史命令记录
-	" :his c           : 命令行命令历史
-	" :his s           : 搜索命令历史
-	" q/               : 搜索命令历史的窗口
-	" q:               : 命令行命令历史的窗口
-	" :<C-F>           : 历史命令记录的窗口
-	"
-	"
-" -------------------------------------------------------------------------------------------------
-"# 选中和删除
-	" df=, yf=, cf=, vf= 从当前字符开始删除(复制,改变,选中),直到遇到=之后
-	" dt”, yt”, ct”, vt” 从当前字符开始删除(复制,改变,选中),直到遇到”之前
 " -------------------------------------------------------------------------------------------------
 "# 翻页与移动:
+" -------------------------------------------------------------------------------------------------
 	" 整页翻页:
 	"	ctrl-f 
 	"	ctrl-b
@@ -1752,6 +1936,7 @@ inoremap <silent> <F4> <CR>/***
 	"
 " -------------------------------------------------------------------------------------------------
 " 当前行移动光标: 0 ^ $ f F t T , ;
+" -------------------------------------------------------------------------------------------------
 		" 0      → 到行头
 		" ^      → 到本行的第一个非blank字符
 		" $      → 到行尾
@@ -1764,8 +1949,19 @@ inoremap <silent> <F4> <CR>/***
 	"0      ^            fi     t)         4fi        g_    $ 
 	"|      |     |       |     |           |          |    |
 	"       x =  (name_1,vision_3); # this is a comment.
-	" -------------------------------------------------------------------------------------------------
+" -------------------------------------------------------------------------------------------------
+" -------------------------------------------------------------------------------------------------
+" 关于换行
+" -------------------------------------------------------------------------------------------------
+	" 1. 转换文件换行方式
+	" 解决方法：设置fileformat属性，:set ff=dos (\r\n win换行) :set ff=unix (\n unix/linux换行) :set ff=mac (\r Mac换行)
+	" 
+	" 2. 换行符混排（常见的情况是Win换行和Unix换行混排，VIM中会将文件识别为unix换行，在行尾显示^M）
+	" 需求：统一换行符
+	" 解决方法：输入:%s/\r//ge,将多余\r去掉，这时全部剩下\n换行然后保存。如果需要保存为win换行设置:set ff=dos再保存即可。
 
+
+" -------------------------------------------------------------------------------------------------
 " for verilog
 " -------------------------------------------------------------------------------------------------
 	inoremap    <A-a> <ESC>:Allpn<CR>
@@ -1834,6 +2030,8 @@ inoremap <silent> <F4> <CR>/***
 "--------------------------------------------------------------------------
 " [参考线切换] {{{
 "--------------------------------------------------------------------------
+" 通过设置cc的值，来显示一条纵向的线作参考线
+" 代码如下:快捷键Alt+o向左、Alt+u向左移动参考线
 fu! ReferenceLine(t)
     let ccnum = &cc
     if ccnum -- '' | let ccnum = 0 | en
@@ -1848,12 +2046,11 @@ fu! ReferenceLine(t)
 endf
 nn <silent> <A-u> :call ReferenceLine('sub')<CR>
 nn <silent> <A-o> :call ReferenceLine('add')<CR>
-" }}}
 
 "--------------------------------------------------------------------------
 "快速打开编辑 .vimrc配置文件--->",ee"
 "--------------------------------------------------------------------------
-	map <silent> <leader>ee :e ~/.vimrc<cr>
+	map <silent> <leader>ee :e ~/.vim/vimrc<cr>
 	"快速保存文件--->",w"
 	" nmap <leader>z :w<CR>
 	" nmap <leader>e :q<CR>
